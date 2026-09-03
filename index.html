@@ -29,13 +29,6 @@
             padding: 22px 15px;
             border-bottom: 4px solid #CE1126;
         }
-        .hero-banner img {
-            width: 85px;
-            height: 85px;
-            object-fit: contain;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
-        }
         .hero-banner h1 {
             margin: 0;
             font-size: 1.7em;
@@ -307,7 +300,6 @@
 
 <div class="container">
     <div class="hero-banner">
-        <img src="magno quinielas mx.png" alt="Logo Magno Quinielas MX" onerror="this.style.display='none'">
         <h1>MAGNO QUINIELAS MX</h1>
         <p>Tus pronósticos valen oro</p>
     </div>
@@ -364,7 +356,6 @@
     </div>
 </div>
 
-<!-- Ventana Modal de Reglas y Acumulados -->
 <div id="modal-reglas" class="modal">
     <div class="modal-content">
         <h3>📖 Reglas y Acumulados</h3>
@@ -433,7 +424,6 @@ Y ya en caso que nadien aiga resultado ganado se vuelve acumular y solo entran l
     </div>
 </div>
 
-<!-- Ventana Modal de Términos y Condiciones -->
 <div id="modal-terminos" class="modal">
     <div class="modal-content">
         <h3>📋 Términos y Condiciones</h3>
@@ -444,107 +434,16 @@ Y ya en caso que nadien aiga resultado ganado se vuelve acumular y solo entran l
 
 <script>
     const partidos = [
-        { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
-        { id: 2, local: "Chivas", escL: "219 (3).png", visita: "Pumas", escV: "pumas-unam-logo-png_seeklogo-177354.png" },
-        { id: 3, local: "Monterrey", escL: "500px-Club_de_Fútbol_Monterrey_logo.svg.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
-        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "León", escV: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg" },
-        { id: 5, local: "Santos", escL: "santos-laguna-logo-footylogos-1200.webp", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
-        { id: 6, local: "Atlas", escL: "250px-Fútbol_Club_Atlas.svg.png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.svg.png" },
-        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png" },
-        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" }
+        { id: 1, local: "América", escL: "https://upload.wikimedia.org/wikipedia/commons/2/22/Club_América_logo.svg", visita: "Cruz Azul", escV: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Cruz_Azul_fc.svg" },
+        { id: 2, local: "Chivas", escL: "https://upload.wikimedia.org/wikipedia/commons/3/36/Guadalajara_logo.svg", visita: "Pumas", escV: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Pumas_UNAM_logo.svg" },
+        { id: 3, local: "Monterrey", escL: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Club_de_F%C3%BAtbol_Monterrey_logo.svg", visita: "Tigres", escV: "https://upload.wikimedia.org/wikipedia/commons/4/42/Tigres_UANL_logo.svg" },
+        { id: 4, local: "Toluca", escL: "https://upload.wikimedia.org/wikipedia/commons/2/29/Club_Toluca_Logo.svg", visita: "León", escV: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Club_Le%C3%B3n_logo.svg" },
+        { id: 5, local: "Santos", escL: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Santos_Laguna_logo.svg", visita: "Pachuca", escV: "https://upload.wikimedia.org/wikipedia/commons/1/14/Pachuca_logo.svg" },
+        { id: 6, local: "Atlas", escL: "https://upload.wikimedia.org/wikipedia/commons/8/87/F%C3%BAtbol_Club_Atlas.svg", visita: "Necaxa", escV: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Club_Necaxa_Logo.svg" },
+        { id: 7, local: "Juárez", escL: "https://upload.wikimedia.org/wikipedia/commons/9/91/FC_Ju%C3%A1rez_logo.svg", visita: "Tijuana", escV: "https://upload.wikimedia.org/wikipedia/commons/4/48/Club_Tijuana_logo.svg" },
+        { id: 8, local: "Puebla", escL: "https://upload.wikimedia.org/wikipedia/commons/5/54/Club_Puebla_logo.svg", visita: "San Luis", escV: "https://upload.wikimedia.org/wikipedia/commons/9/92/Atl%C3%A9tico_San_Luis_logo.svg" }
     ];
 
     function renderPartidos() {
-        const container = document.getElementById('matches-container');
-        container.innerHTML = '';
-        partidos.forEach(p => {
-            container.innerHTML += `
-                <div class="match-row">
-                    <div class="team">
-                        <img src="${p.escL}" alt="${p.local}">
-                        <span>${p.local}</span>
-                    </div>
-                    <div class="options">
-                        <label><input type="checkbox" name="m${p.id}" value="L" onchange="verificarLimiteYCalcular(this)"><span>L</span></label>
-                        <label><input type="checkbox" name="m${p.id}" value="E" onchange="verificarLimiteYCalcular(this)"><span>E</span></label>
-                        <label><input type="checkbox" name="m${p.id}" value="V" onchange="verificarLimiteYCalcular(this)"><span>V</span></label>
-                    </div>
-                    <div class="team right">
-                        <span>${p.visita}</span>
-                        <img src="${p.escV}" alt="${p.visita}">
-                    </div>
-                </div>
-            `;
-        });
-    }
-
-    function verificarLimiteYCalcular(element) {
-        let seleccionadosTotales = 0;
-        partidos.forEach(p => {
-            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
-            seleccionadosTotales += checks.length;
-        });
-
-        if (seleccionadosTotales > 12) {
-            alert("⚠️ Límite máximo alcanzado: Solo se permiten hasta 4 dobles/triples (extras) por $400.00.");
-            element.checked = false;
-        }
-        calcularTotal();
-    }
-
-    function calcularTotal() {
-        let total = 100;
-        let seleccionadosTotales = 0;
-
-        partidos.forEach(p => {
-            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
-            seleccionadosTotales += checks.length;
-        });
-
-        if (seleccionadosTotales > 8) {
-            let extras = seleccionadosTotales - 8;
-            if (extras === 1) total = 125;
-            else if (extras === 2) total = 150;
-            else if (extras === 3) total = 200;
-            else if (extras >= 4) total = 400;
-        }
-
-        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
-    }
-
-    function limpiarFormulario() {
-        document.getElementById('participant-name').value = '';
-        partidos.forEach(p => {
-            const checks = document.querySelectorAll(`input[name="m${p.id}"]`);
-            checks.forEach(c => c.checked = false);
-        });
-        calcularTotal();
-    }
-
-    function selecciónAleatoria() {
-        limpiarFormulario();
-        partidos.forEach(p => {
-            const opciones = ['L', 'E', 'V'];
-            const aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
-            const checkSeleccionado = document.querySelector(`input[name="m${p.id}"][value="${aleatorio}"]`);
-            if (checkSeleccionado) checkSeleccionado.checked = true;
-        });
-        calcularTotal();
-    }
-
-    function abrirModal(id) {
-        document.getElementById(id).style.display = 'flex';
-    }
-
-    function cerrarModal(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-
-    function actualizarCronometro() {
-        const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
-        const ahora = new Date().getTime();
-        const diferencia = fechaCierre - ahora;
-
-        if (diferencia < 0) {
-            document.getElementById('days').innerText = "00";
-            docum
+        const container =
+    
