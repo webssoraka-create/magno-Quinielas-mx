@@ -78,12 +78,12 @@
             font-weight: bold;
         }
         .info-bar {
-            background-color: #DAA520;
-            color: #111;
+            background: linear-gradient(to right, #DAA520, #228B22);
+            color: white;
             padding: 8px;
             text-align: center;
             font-weight: bold;
-            font-size: 0.85em;
+            font-size: 0.8em;
             display: flex;
             justify-content: space-between;
         }
@@ -143,7 +143,7 @@
 
     <div class="info-bar">
         <span>BASE: $100.00 (8 PARTIDOS)</span>
-        <span>CIERRE: VIERNES 11:00 P. M.</span>
+        <span>CIERRE: 11 DE SEPT. 3:30 P. M.</span>
     </div>
 
     <div class="form-section">
@@ -161,14 +161,14 @@
 
 <script>
     const partidos = [
-        { id: 1, local: "América", escL: "04a814c4039eca50e7f7b3017a5a3a2a.png", visita: "Cruz Azul", escV: "219 (3).png" },
-        { id: 2, local: "Chivas", escL: "1280px-Guadalajara_Logo.png", visita: "Pumas", escV: "500px-UNAM.png" },
-        { id: 3, local: "Monterrey", escL: "1280px-Monterrey_Logo.png", visita: "Tigres", escV: "1280px-Tigres_UANL_Logo.png" },
+        { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
+        { id: 2, local: "Chivas", escL: "1280px-Guadalajara_Logo.png", visita: "Pumas", escV: "pumas-unam-logo-png_1280.png" },
+        { id: 3, local: "Monterrey", escL: "1280px-Monterrey_Logo.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
         { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.png", visita: "León", escV: "250px-Fútbol_Club_Atlético_San_Luis_logo.png" },
-        { id: 5, local: "Santos", escL: "500px-Santos_Laguna_Logo.png", visita: "Pachuca", escV: "1280px-Pachuca_Logo.png" },
+        { id: 5, local: "Santos", escL: "santos-laguna-logo-footer.png", visita: "Pachuca", escV: "pachuca-logo-png-seeklogo-425251.png" },
         { id: 6, local: "Atlas", escL: "219 (3).png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.png" },
-        { id: 7, local: "Juárez", escL: "1280px-FC_Juárez_Logo.png", visita: "Tijuana", escV: "414-4142028_club-tijuana.png" },
-        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "500px-Club_de_Fútbol_Atle.png" }
+        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana.png" },
+        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56d296c0.png" }
     ];
 
     function renderPartidos() {
@@ -196,13 +196,13 @@
     }
 
     function calcularTotal() {
-        let total = 100; // Base de 8 partidos
+        let total = 100;
         document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
     }
 
     function limpiarFormulario() {
         document.getElementById('participant-name').value = '';
-        partidos.p(p => {
+        partidos.forEach(p => {
             const radios = document.querySelectorAll(`input[name="m${p.id}"]`);
             radios.forEach(r => r.checked = false);
         });
