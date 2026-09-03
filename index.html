@@ -19,7 +19,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
-            border: 3px solid #006341; /* Verde patriótico */
+            border: 3px solid #006341;
         }
         .hero-banner {
             position: relative;
@@ -27,7 +27,7 @@
             color: white;
             text-align: center;
             padding: 22px 15px;
-            border-bottom: 4px solid #CE1126; /* Rojo patriótico */
+            border-bottom: 4px solid #CE1126;
         }
         .hero-banner img {
             width: 85px;
@@ -47,12 +47,12 @@
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD100; /* Dorado / Amarillo bandera */
+            color: #FFD100;
             font-weight: bold;
             letter-spacing: 1px;
         }
         .subheader {
-            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor */
+            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126);
             color: #000;
             text-align: center;
             padding: 8px;
@@ -144,7 +144,7 @@
             display: none;
         }
         .options input:checked + span {
-            background-color: #006341; /* Verde selección */
+            background-color: #006341;
             color: white;
             font-weight: bold;
             padding: 3px 7px;
@@ -201,6 +201,28 @@
         }
         .btn-clear { background-color: #CE1126; }
         .btn-random { background-color: #34495e; }
+        
+        .info-buttons-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .btn-info-modal {
+            flex: 1;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-info-modal:hover {
+            background-color: #0056b3;
+        }
+
         .btn-whatsapp {
             background-color: #006341;
             width: 100%;
@@ -209,7 +231,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
-        /* Estilo para el botón de ayuda de WhatsApp */
         .btn-help-whatsapp {
             display: flex;
             align-items: center;
@@ -228,6 +249,57 @@
         .btn-help-whatsapp img {
             width: 20px;
             height: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border-top: 4px solid #007bff;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            color: #006341;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        .modal-content p {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #444;
+            text-align: justify;
+            white-space: pre-line; /* Respeta los párrafos y saltos de línea */
+        }
+        .modal-close {
+            background-color: #CE1126;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 15px auto 0 auto;
         }
     </style>
 </head>
@@ -277,14 +349,55 @@
             <button class="btn-clear" onclick="limpiarFormulario()">Limpiar</button>
             <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
         </div>
+
+        <div class="info-buttons-container">
+            <button class="btn-info-modal" onclick="abrirModal('modal-reglas')">📖 Reglas y Acumulados</button>
+            <button class="btn-info-modal" onclick="abrirModal('modal-terminos')">📋 Términos y Condiciones</button>
+        </div>
         
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp 📱</button>
         
-        <!-- Botón de Ayuda / Más Información directo a tu WhatsApp -->
         <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             ¿Dudas? Más información sobre cómo se juega
         </a>
+    </div>
+</div>
+
+<!-- Ventana Modal de Reglas y Acumulados -->
+<div id="modal-reglas" class="modal">
+    <div class="modal-content">
+        <h3>📖 Reglas y Acumulados</h3>
+        <p>QUINIELAS MAGNO MX - REGLAS Y DESCRIPCIÓN
+
+Si hay 1 ganador, se lleva el 1.er lugar y el resultado correspondiente de la jornada. 
+Si hay 2 empatados, se divide el resultado correspondiente entre ambos. 
+Con 3 o 4 empatados, el premio pasa al acumulado. 
+Si son 5 empatados, se realiza una ruleta para determinar el resultado. 
+Con 6 empatados, el resultado se queda acumulado y aplica la segunda regla. Y así sucesivamente, dependiendo de cuántas personas queden empatadas.
+
+IMPORTANTE: En caso de que el resultado pase al acumulado, solo podrán participar en el siguiente acumulado las personas que hayan entrado al acumulado anterior.
+
+REGLA — SEGUNDA ACUMULACIÓN
+Cuando el resultado llegue a su segunda acumulación, se aplicará esta modalidad: 1 participante obtiene el resultado completo de la jornada; 2 participantes dividen el resultado en partes iguales; 3 o más participantes hacen que el resultado pase al acumulado para la siguiente jornada. Esta regla se seguirá aplicando de acuerdo con la cantidad de participantes que queden empatados.
+
+REGLA ESPECIAL — TERCER ACUMULADO
+En caso de que el acumulado llegue a su tercera acumulación, se aplicará una modalidad especial: el 1.er lugar, 2.º lugar y 3.er lugar obtienen una parte del resultado correspondiente. A partir del 4.º lugar, los participantes que no alcancen las posiciones establecidas quedan fuera del resultado de esa jornada.
+
+REGLA ESPECIAL DE EMPATES — 4ª ACUMULACIÓN
+En caso de que varios participantes queden empatados con el mismo número en la 3ª y vuelva a suceder lo mismo en la 4ª: con 5 empatados, los 5 participantes que obtuvieron el resultado ganador quedan seleccionados y las demás entradas quedan fuera, continuando el acumulado. Con 6 o 7 empatados ocurre de la misma forma y así sucesivamente, aumentando conforme aumente el número de personas empatadas.
+
+IMPORTANTE SOBRE PARTICIPACIONES: Cada persona cuenta como un solo participante, aunque haya realizado hasta 3 quinielas; sin embargo, se escogerá la mejor quiniela de cada uno. En caso de que nadie obtenga resultado ganador se vuelve a acumular, solo entran los del acumulado y se aplicará lo de la 3ª regla hasta que alguien gane, o la 4ª de ser necesario, siguiéndose así hasta que alguien se lleve una parte del dinero.</p>
+        <button class="modal-close" onclick="cerrarModal('modal-reglas')">Cerrar</button>
+    </div>
+</div>
+
+<!-- Ventana Modal de Términos y Condiciones -->
+<div id="modal-terminos" class="modal">
+    <div class="modal-content">
+        <h3>📋 Términos y Condiciones</h3>
+        <p>Tu participación y quiniela oficial quedan registradas únicamente al recibir el comprobante de pago por medio de nuestro WhatsApp oficial. Los ganadores se definirán basándose estrictamente en los resultados oficiales de los partidos al término de los 90 minutos reglamentarios. Al enviar tu quiniela a través de nuestra plataforma, aceptas automáticamente estas condiciones. Cualquier duda relacionada con los pagos, premios o entrega de premios se resolverá directamente mediante atención personalizada en nuestro canal de WhatsApp.</p>
+        <button class="modal-close" onclick="cerrarModal('modal-terminos')">Cerrar</button>
     </div>
 </div>
 
@@ -331,7 +444,6 @@
             seleccionadosTotales += checks.length;
         });
 
-        // 8 partidos base + 4 extras máximos = 12 selecciones totales permitidas
         if (seleccionadosTotales > 12) {
             alert("⚠️ Límite máximo alcanzado: Solo se permiten hasta 4 dobles/triples (extras) por $400.00.");
             element.checked = false;
@@ -350,10 +462,10 @@
 
         if (seleccionadosTotales > 8) {
             let extras = seleccionadosTotales - 8;
-            if (extras === 1) total = 125;       // 1er extra: $25 (Total $125)
-            else if (extras === 2) total = 150;  // 2do extra: $50 (Total $150)
-            else if (extras === 3) total = 200;  // 3er extra: $100 (Total $200)
-            else if (extras >= 4) total = 400;   // 4to extra: $200 (Total $400 - Límite Máximo)
+            if (extras === 1) total = 125;
+            else if (extras === 2) total = 150;
+            else if (extras === 3) total = 200;
+            else if (extras >= 4) total = 400;
         }
 
         document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
@@ -379,6 +491,14 @@
         calcularTotal();
     }
 
+    function abrirModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function cerrarModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
     function actualizarCronometro() {
         const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
         const ahora = new Date().getTime();
@@ -398,51 +518,4 @@
         const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
         document.getElementById('days').innerText = String(dias).padStart(2, '0');
-        document.getElementById('hours').innerText = String(horas).padStart(2, '0');
-        document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
-        document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
-    }
-
-    setInterval(actualizarCronometro, 1000);
-
-    function enviarWhatsApp() {
-        const nombre = document.getElementById('participant-name').value.trim();
-        if(!nombre) {
-            alert('Por favor ingresa tu nombre');
-            return;
-        }
-        let mensaje = `*🇲🇽 MAGNO QUINIELAS MX 🇲🇽*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
-        let seleccionadosTotales = 0;
-        
-        partidos.forEach(p => {
-            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
-            let pronosticos = Array.from(checks).map(c => c.value).join('/');
-            if(!pronosticos) pronosticos = '-';
-            else seleccionadosTotales += checks.length;
-            mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronosticos}]*\n`;
-        });
-
-        let total = 100;
-        if (seleccionadosTotales > 8) {
-            let extras = seleccionadosTotales - 8;
-            if (extras === 1) total = 125;
-            else if (extras === 2) total = 150;
-            else if (extras === 3) total = 200;
-            else if (extras >= 4) total = 400;
-        }
-
-        mensaje += `\n*TOTAL: $${total}.00*`;
-        
-        // Número configurado automáticamente para recibir las quinielas: +52 984 279 4702
-        const url = `https://api.whatsapp.com/send?phone=5219842794702&text=${encodeURIComponent(mensaje)}`;
-        window.open(url, '_blank');
-    }
-
-    window.onload = function() {
-        renderPartidos();
-        actualizarCronometro();
-    };
-</script>
-
-</body>
-</html>
+        document.get
