@@ -19,7 +19,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
-            border: 3px solid #006341;
+            border: 3px solid #006341; /* Verde patriótico */
         }
         .hero-banner {
             position: relative;
@@ -27,7 +27,14 @@
             color: white;
             text-align: center;
             padding: 22px 15px;
-            border-bottom: 4px solid #CE1126;
+            border-bottom: 4px solid #CE1126; /* Rojo patriótico */
+        }
+        .hero-banner img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
         }
         .hero-banner h1 {
             margin: 0;
@@ -40,12 +47,12 @@
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD100;
+            color: #FFD100; /* Dorado / Amarillo bandera */
             font-weight: bold;
             letter-spacing: 1px;
         }
         .subheader {
-            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126);
+            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor */
             color: #000;
             text-align: center;
             padding: 8px;
@@ -137,7 +144,7 @@
             display: none;
         }
         .options input:checked + span {
-            background-color: #006341;
+            background-color: #006341; /* Verde selección */
             color: white;
             font-weight: bold;
             padding: 3px 7px;
@@ -194,7 +201,6 @@
         }
         .btn-clear { background-color: #CE1126; }
         .btn-random { background-color: #34495e; }
-        
         .btn-whatsapp {
             background-color: #006341;
             width: 100%;
@@ -203,6 +209,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
+        /* Estilo para el botón de ayuda de WhatsApp */
         .btn-help-whatsapp {
             display: flex;
             align-items: center;
@@ -223,6 +230,7 @@
             height: 20px;
         }
 
+        /* Estilos de la Ventana Emergente (Modal) */
         .modal {
             display: none;
             position: fixed;
@@ -252,14 +260,14 @@
         .modal-content h3 {
             margin-top: 0;
             color: #006341;
-            font-size: 1.15em;
+            font-size: 1.1em;
             text-align: center;
         }
         .modal-text-box {
-            font-size: 0.82em;
-            line-height: 1.5;
-            color: #444;
-            max-height: 180px;
+            font-size: 0.78em;
+            line-height: 1.4;
+            color: #333;
+            max-height: 160px;
             overflow-y: auto;
             background: #f9f9f9;
             padding: 10px;
@@ -267,16 +275,18 @@
             border-radius: 6px;
             margin-bottom: 12px;
             white-space: pre-line;
+            text-align: left;
         }
         .checkbox-container {
             display: flex;
             align-items: flex-start;
             gap: 8px;
             margin-bottom: 15px;
-            font-size: 0.85em;
+            font-size: 0.82em;
             font-weight: bold;
-            color: #333;
+            color: #222;
             cursor: pointer;
+            text-align: left;
         }
         .checkbox-container input {
             margin-top: 2px;
@@ -287,13 +297,30 @@
             display: flex;
             gap: 10px;
         }
-        .modal-confirm {
+        /* Dos botones azules como pediste */
+        .btn-modal-blue-1 {
+            background-color: #004d33;
+            color: white;
+            flex: 1;
+            padding: 11px 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85em;
+            text-align: center;
+        }
+        .btn-modal-blue-2 {
             background-color: #006341;
             color: white;
-        }
-        .modal-cancel {
-            background-color: #CE1126;
-            color: white;
+            flex: 1;
+            padding: 11px 8px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85em;
+            text-align: center;
         }
     </style>
 </head>
@@ -301,6 +328,7 @@
 
 <div class="container">
     <div class="hero-banner">
+        <img src="magno quinielas mx.png" alt="Logo Magno Quinielas MX" onerror="this.style.display='none'">
         <h1>MAGNO QUINIELAS MX</h1>
         <p>Tus pronósticos valen oro</p>
     </div>
@@ -328,7 +356,6 @@
         </div>
     </div>
 
-    <!-- Aquí se cargan dinámicamente los partidos -->
     <div id="matches-container"></div>
 
     <div class="info-bar">
@@ -344,8 +371,10 @@
             <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
         </div>
         
-        <button class="btn-whatsapp" onclick="verificarNombreYAbrirTerminos()">Enviar Quiniela por WhatsApp 📱</button>
+        <!-- Botón modificado para abrir primero la ventanilla de términos -->
+        <button class="btn-whatsapp" onclick="abrirModalTerminos()">Enviar Quiniela por WhatsApp 📱</button>
         
+        <!-- Botón de Ayuda / Más Información directo a tu WhatsApp -->
         <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             ¿Dudas? Más información sobre cómo se juega
@@ -353,10 +382,10 @@
     </div>
 </div>
 
-<!-- Ventana Modal de Reglas y Términos antes de enviar a WhatsApp -->
-<div id="modal-terminos-reglas" class="modal">
+<!-- Ventana Modal de Reglas y Términos al enviar a WhatsApp -->
+<div id="modal-terminos" class="modal">
     <div class="modal-content">
-        <h3>📖 Reglas, Términos y Condiciones</h3>
+        <h3>📖 REGLAS Y TÉRMINOS Y CONDICIONES</h3>
         <div class="modal-text-box">
 <strong>--- REGLAS Y ACUMULADOS ---</strong>
 1 ganador: se lleva el 1.er lugar y el resultado correspondiente de la jornada.
@@ -384,32 +413,32 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
         </div>
 
         <label class="checkbox-container">
-            <input type="checkbox" id="check-acepto">
-            <span>He leído y acepto las Reglas, Términos y Condiciones de la quiniela.</span>
+            <input type="checkbox" id="check-reglas">
+            <span>He leído y acepto las reglas, términos y condiciones de la quiniela.</span>
         </label>
 
         <div class="modal-buttons">
-            <button class="modal-cancel" onclick="cerrarModalTerminos()">Cancelar</button>
-            <button class="modal-confirm" onclick="confirmarYEnviarWhatsApp()">Aceptar y Enviar</button>
+            <!-- Dos botones azules como pediste -->
+            <button class="btn-modal-blue-1" onclick="cerrarModalTerminos()">Regresar / Cancelar</button>
+            <button class="btn-modal-blue-2" onclick="enviarWhatsAppReal()">Sí, He Leído y Acepto</button>
         </div>
     </div>
 </div>
 
 <script>
     const partidos = [
-        { id: 1, local: "América", escL: "https://upload.wikimedia.org/wikipedia/commons/2/22/Club_América_logo.svg", visita: "Cruz Azul", escV: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Cruz_Azul_fc.svg" },
-        { id: 2, local: "Chivas", escL: "https://upload.wikimedia.org/wikipedia/commons/3/36/Guadalajara_logo.svg", visita: "Pumas", escV: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Pumas_UNAM_logo.svg" },
-        { id: 3, local: "Monterrey", escL: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Club_de_F%C3%BAtbol_Monterrey_logo.svg", visita: "Tigres", escV: "https://upload.wikimedia.org/wikipedia/commons/4/42/Tigres_UANL_logo.svg" },
-        { id: 4, local: "Toluca", escL: "https://upload.wikimedia.org/wikipedia/commons/2/29/Club_Toluca_Logo.svg", visita: "León", escV: "https://upload.wikimedia.org/wikipedia/commons/2/2b/Club_Le%C3%B3n_logo.svg" },
-        { id: 5, local: "Santos", escL: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Santos_Laguna_logo.svg", visita: "Pachuca", escV: "https://upload.wikimedia.org/wikipedia/commons/1/14/Pachuca_logo.svg" },
-        { id: 6, local: "Atlas", escL: "https://upload.wikimedia.org/wikipedia/commons/8/87/F%C3%BAtbol_Club_Atlas.svg", visita: "Necaxa", escV: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Club_Necaxa_Logo.svg" },
-        { id: 7, local: "Juárez", escL: "https://upload.wikimedia.org/wikipedia/commons/9/91/FC_Ju%C3%A1rez_logo.svg", visita: "Tijuana", escV: "https://upload.wikimedia.org/wikipedia/commons/4/48/Club_Tijuana_logo.svg" },
-        { id: 8, local: "Puebla", escL: "https://upload.wikimedia.org/wikipedia/commons/5/54/Club_Puebla_logo.svg", visita: "San Luis", escV: "https://upload.wikimedia.org/wikipedia/commons/9/92/Atl%C3%A9tico_San_Luis_logo.svg" }
+        { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
+        { id: 2, local: "Chivas", escL: "219 (3).png", visita: "Pumas", escV: "pumas-unam-logo-png_seeklogo-177354.png" },
+        { id: 3, local: "Monterrey", escL: "500px-Club_de_Fútbol_Monterrey_logo.svg.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
+        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "León", escV: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg" },
+        { id: 5, local: "Santos", escL: "santos-laguna-logo-footylogos-1200.webp", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
+        { id: 6, local: "Atlas", escL: "250px-Fútbol_Club_Atlas.svg.png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.svg.png" },
+        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png" },
+        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" }
     ];
 
     function renderPartidos() {
         const container = document.getElementById('matches-container');
-        if(!container) return;
         container.innerHTML = '';
         partidos.forEach(p => {
             container.innerHTML += `
@@ -439,6 +468,7 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
             seleccionadosTotales += checks.length;
         });
 
+        // 8 partidos base + 4 extras máximos = 12 selecciones totales permitidas
         if (seleccionadosTotales > 12) {
             alert("⚠️ Límite máximo alcanzado: Solo se permiten hasta 4 dobles/triples (extras) por $400.00.");
             element.checked = false;
@@ -457,14 +487,13 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
 
         if (seleccionadosTotales > 8) {
             let extras = seleccionadosTotales - 8;
-            if (extras === 1) total = 125;
-            else if (extras === 2) total = 150;
-            else if (extras === 3) total = 200;
-            else if (extras >= 4) total = 400;
+            if (extras === 1) total = 125;       // 1er extra: $25 (Total $125)
+            else if (extras === 2) total = 150;  // 2do extra: $50 (Total $150)
+            else if (extras === 3) total = 200;  // 3er extra: $100 (Total $200)
+            else if (extras >= 4) total = 400;   // 4to extra: $200 (Total $400 - Límite Máximo)
         }
 
-        const display = document.getElementById('total-display');
-        if(display) display.innerText = `TOTAL: $${total}.00`;
+        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
     }
 
     function limpiarFormulario() {
@@ -508,23 +537,4 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
         document.getElementById('days').innerText = String(dias).padStart(2, '0');
         document.getElementById('hours').innerText = String(horas).padStart(2, '0');
         document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
-        document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
-    }
-
-    function verificarNombreYAbrirTerminos() {
-        const nombre = document.getElementById('participant-name').value.trim();
-        if(!nombre) {
-            alert('Por favor ingresa tu nombre antes de enviar la quiniela.');
-            document.getElementById('participant-name').focus();
-            return;
-        }
-        document.getElementById('check-acepto').checked = false;
-        document.getElementById('modal-terminos-reglas').style.display = 'flex';
-    }
-
-    function cerrarModalTerminos() {
-        document.getElementById('modal-terminos-reglas').style.display = 'none';
-    }
-
-    function confirmarYEnviarWhatsApp() {
-      
+        document.getElementById('seconds').in
