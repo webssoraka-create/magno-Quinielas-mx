@@ -328,6 +328,7 @@
         </div>
     </div>
 
+    <!-- Aquí se cargan dinámicamente los partidos -->
     <div id="matches-container"></div>
 
     <div class="info-bar">
@@ -517,7 +518,6 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
             document.getElementById('participant-name').focus();
             return;
         }
-        // Limpiar el checkbox previo y abrir modal
         document.getElementById('check-acepto').checked = false;
         document.getElementById('modal-terminos-reglas').style.display = 'flex';
     }
@@ -527,4 +527,4 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
     }
 
     function confirmarYEnviarWhatsApp() {
-        c
+      
