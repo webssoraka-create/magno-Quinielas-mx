@@ -69,13 +69,17 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.8em;
+            background: #fff;
         }
         .options input {
             display: none;
         }
         .options input:checked + span {
-            background-color: #ddd;
+            background-color: #006400;
+            color: white;
             font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
         }
         .info-bar {
             background: linear-gradient(to right, #DAA520, #228B22);
@@ -163,12 +167,12 @@
     const partidos = [
         { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
         { id: 2, local: "Chivas", escL: "1280px-Guadalajara_Logo.png", visita: "Pumas", escV: "pumas-unam-logo-png_1280.png" },
-        { id: 3, local: "Monterrey", escL: "1280px-Monterrey_Logo.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
-        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.png", visita: "León", escV: "250px-Fútbol_Club_Atlético_San_Luis_logo.png" },
-        { id: 5, local: "Santos", escL: "santos-laguna-logo-footer.png", visita: "Pachuca", escV: "pachuca-logo-png-seeklogo-425251.png" },
-        { id: 6, local: "Atlas", escL: "219 (3).png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.png" },
-        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana.png" },
-        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56d296c0.png" }
+        { id: 3, local: "Monterrey", escL: "500px-Club_de_Fútbol_Monterrey_logo.svg.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
+        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "León", escV: "250px-Fútbol_Club_Atlético_San_Luis_logo.png" },
+        { id: 5, local: "Santos", escL: "santos-laguna-logo-footer.png", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
+        { id: 6, local: "Atlas", escL: "250px-Fútbol_Club_Atlas.svg.png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.svg.png" },
+        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png" },
+        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" }
     ];
 
     function renderPartidos() {
@@ -182,9 +186,9 @@
                         <span>${p.local}</span>
                     </div>
                     <div class="options">
-                        <label><input type="radio" name="m${p.id}" value="L" onchange="calcularTotal()"><span>L</span></label>
-                        <label><input type="radio" name="m${p.id}" value="E" onchange="calcularTotal()"><span>E</span></label>
-                        <label><input type="radio" name="m${p.id}" value="V" onchange="calcularTotal()"><span>V</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="L" onchange="calcularTotal()"><span>L</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="E" onchange="calcularTotal()"><span>E</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="V" onchange="calcularTotal()"><span>V</span></label>
                     </div>
                     <div class="team right">
                         <span>${p.visita}</span>
@@ -196,34 +200,40 @@
     }
 
     function calcularTotal() {
-        let seleccionados = 0;
+        let total = 100;
+        let seleccionadosTotales = 0;
+
         partidos.forEach(p => {
-            const rad = document.querySelector(`input[name="m${p.id}"]:checked`);
-            if (rad) seleccionados++;
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            seleccionadosTotales += checks.length;
         });
-        // Si quieres que cuente base fija o incremente por partido extra:
-        let total = 100; 
-        if(seleccionados > 8) {
-            total = 100 + ((seleccionados - 8) * 12.5); // Ajuste proporcional si pasa de 8
+
+        if (seleccionadosTotales > 8) {
+            let extras = seleccionadosTotales - 8;
+            if (extras === 1) total = 125;
+            else if (extras === 2) total = 150;
+            else if (extras >= 3) total = 200;
         }
-        document.getElementById('total-display').innerText = `TOTAL: $${total.toFixed(2)}`;
+
+        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
     }
 
     function limpiarFormulario() {
         document.getElementById('participant-name').value = '';
         partidos.forEach(p => {
-            const radios = document.querySelectorAll(`input[name="m${p.id}"]`);
-            radios.forEach(r => r.checked = false);
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]`);
+            checks.forEach(c => c.checked = false);
         });
         calcularTotal();
     }
 
     function selecciónAleatoria() {
+        limpiarFormulario();
         partidos.forEach(p => {
             const opciones = ['L', 'E', 'V'];
             const aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
-            const radioSeleccionado = document.querySelector(`input[name="m${p.id}"][value="${aleatorio}"]`);
-            if (radioSeleccionado) radioSeleccionado.checked = true;
+            const checkSeleccionado = document.querySelector(`input[name="m${p.id}"][value="${aleatorio}"]`);
+            if (checkSeleccionado) checkSeleccionado.checked = true;
         });
         calcularTotal();
     }
@@ -235,15 +245,25 @@
             return;
         }
         let mensaje = `*MAGNO QUINIELAS MX*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
+        let seleccionadosTotales = 0;
+        
         partidos.forEach(p => {
-            const seleccionado = document.querySelector(`input[name="m${p.id}"]:checked`);
-            const pronostico = seleccionado ? seleccionado.value : '-';
-            mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronostico}]*\n`;
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            let pronosticos = Array.from(checks).map(c => c.value).join('/');
+            if(!pronosticos) pronosticos = '-';
+            else seleccionadosTotales += checks.length;
+            mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronosticos}]*\n`;
         });
-        let seleccionados = 0;
-        partidos.forEach(p => { if(document.querySelector(`input[name="m${p.id}"]:checked`)) seleccionados++; });
-        let total = seleccionados > 8 ? 100 + ((seleccionados - 8) * 12.5) : 100;
-        mensaje += `\n*TOTAL: $${total.toFixed(2)}*`;
+
+        let total = 100;
+        if (seleccionadosTotales > 8) {
+            let extras = seleccionadosTotales - 8;
+            if (extras === 1) total = 125;
+            else if (extras === 2) total = 150;
+            else if (extras >= 3) total = 200;
+        }
+
+        mensaje += `\n*TOTAL: $${total}.00*`;
         const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
