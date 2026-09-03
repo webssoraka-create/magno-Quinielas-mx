@@ -5,246 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magno Quinielas MX</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 10px; text-align: center; }
-        .container { max-width: 500px; background: white; margin: auto; padding: 15px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
-        h2 { background: #0b6623; color: white; padding: 10px; border-radius: 5px; font-size: 20px; margin-bottom: 5px; }
-        .sub { background: #b30000; color: white; padding: 6px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
-        .match { border-bottom: 1px solid #ddd; padding: 8px 0; margin-bottom: 8px; }
-        .datetime { font-size: 11px; color: #666; font-weight: bold; margin-bottom: 3px; }
-        .teams-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .teams-row span { width: 35%; text-align: center; font-weight: bold; }
-        .options { display: flex; justify-content: center; width: 30%; }
-        .options button { padding: 5px 8px; margin: 0 2px; border: 1px solid #ccc; background: white; cursor: pointer; border-radius: 4px; font-weight: bold; font-size: 12px; }
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 10px; color: #333; }
+        .container { max-width: 500px; background: white; margin: auto; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { background: #0b6623; color: white; text-align: center; padding: 12px; border-radius: 8px; margin-top: 0; font-size: 20px; }
+        .match { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; align-items: center; }
+        .teams-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
+        .team { width: 40%; text-align: center; font-weight: bold; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .team img { width: 40px; height: 40px; object-fit: contain; }
+        .vs { font-size: 12px; color: #777; font-weight: bold; }
+        .options { display: flex; gap: 8px; justify-content: center; width: 100%; }
+        .options button { padding: 6px 12px; border: 1px solid #ccc; background: #fff; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; flex: 1; max-width: 70px; }
         .options button.selected { background: #0b6623; color: white; border-color: #0b6623; }
-        .info { font-weight: bold; color: #333; margin: 8px 0; font-size: 14px; }
-        .total-box { background: #e9ecef; padding: 10px; border-radius: 5px; margin: 10px 0; font-size: 16px; font-weight: bold; color: #0b6623; }
-        input[type="text"] { width: 90%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; text-align: center; font-size: 14px; }
-        .btn-whatsapp { background: #25d366; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
+        .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; margin-top: 20px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>MAGNO QUINIELAS MX</h2>
-    <div class="sub">JORNADA COMPLETA</div>
-    
-    <div class="info">COSTO BASE: $25.00 (Permite dobles)</div>
-    <div class="total-box" id="displayCosto">Total a Pagar: $25.00</div>
+    <h2>⚽ Magno Quinielas MX ⚽</h2>
 
     <!-- Partido 1 -->
     <div class="match">
-        <div class="datetime">11/09/26 - 8:00 p.m.</div>
         <div class="teams-row">
-            <span>Necaxa</span>
-            <div class="options" data-match="1">
-                <button onclick="toggleOption(this, 1, 'L')">L</button>
-                <button onclick="toggleOption(this, 1, 'E')">E</button>
-                <button onclick="toggleOption(this, 1, 'V')">V</button>
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_Am%C3%A9rica.svg" alt="América">
+                América
             </div>
-            <span>Puebla</span>
+            <div class="vs">VS</div>
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Logo_Cruz_Azul.svg" alt="Cruz Azul">
+                Cruz Azul
+            </div>
+        </div>
+        <div class="options">
+            <button onclick="selectOption(this, 1, 'L')">L</button>
+            <button onclick="selectOption(this, 1, 'E')">E</button>
+            <button onclick="selectOption(this, 1, 'V')">V</button>
         </div>
     </div>
 
     <!-- Partido 2 -->
     <div class="match">
-        <div class="datetime">11/09/26 - 10:00 p.m.</div>
         <div class="teams-row">
-            <span>Atlante</span>
-            <div class="options" data-match="2">
-                <button onclick="toggleOption(this, 2, 'L')">L</button>
-                <button onclick="toggleOption(this, 2, 'E')">E</button>
-                <button onclick="toggleOption(this, 2, 'V')">V</button>
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Logo_Guadalajara_-_Chivas.svg" alt="Chivas">
+                Chivas
             </div>
-            <span>Pachuca</span>
+            <div class="vs">VS</div>
+            <div class="team">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_Pumas_UNAM.svg" alt="Pumas">
+                Pumas
+            </div>
+        </div>
+        <div class="options">
+            <button onclick="selectOption(this, 2, 'L')">L</button>
+            <button onclick="selectOption(this, 2, 'E')">E</button>
+            <button onclick="selectOption(this, 2, 'V')">V</button>
         </div>
     </div>
 
-    <!-- Partido 3 -->
-    <div class="match">
-        <div class="datetime">11/09/26 - 10:00 p.m.</div>
-        <div class="teams-row">
-            <span>Tijuana</span>
-            <div class="options" data-match="3">
-                <button onclick="toggleOption(this, 3, 'L')">L</button>
-                <button onclick="toggleOption(this, 3, 'E')">E</button>
-                <button onclick="toggleOption(this, 3, 'V')">V</button>
-            </div>
-            <span>Querétaro</span>
-        </div>
-    </div>
-
-    <!-- Partido 4 -->
-    <div class="match">
-        <div class="datetime">12/09/26 - 1:00 a.m.</div>
-        <div class="teams-row">
-            <span>Toluca</span>
-            <div class="options" data-match="4">
-                <button onclick="toggleOption(this, 4, 'L')">L</button>
-                <button onclick="toggleOption(this, 4, 'E')">E</button>
-                <button onclick="toggleOption(this, 4, 'V')">V</button>
-            </div>
-            <span>Atlas</span>
-        </div>
-    </div>
-
-    <!-- Partido 5 -->
-    <div class="match">
-        <div class="datetime">12/09/26 - 6:00 p.m.</div>
-        <div class="teams-row">
-            <span>León</span>
-            <div class="options" data-match="5">
-                <button onclick="toggleOption(this, 5, 'L')">L</button>
-                <button onclick="toggleOption(this, 5, 'E')">E</button>
-                <button onclick="toggleOption(this, 5, 'V')">V</button>
-            </div>
-            <span>San Luis</span>
-        </div>
-    </div>
-
-    <!-- Partido 6 -->
-    <div class="match">
-        <div class="datetime">12/09/26 - 10:00 p.m.</div>
-        <div class="teams-row">
-            <span>Cruz Azul</span>
-            <div class="options" data-match="6">
-                <button onclick="toggleOption(this, 6, 'L')">L</button>
-                <button onclick="toggleOption(this, 6, 'E')">E</button>
-                <button onclick="toggleOption(this, 6, 'V')">V</button>
-            </div>
-            <span>América</span>
-        </div>
-    </div>
-
-    <!-- Partido 7 -->
-    <div class="match">
-        <div class="datetime">13/09/26 - 7:00 p.m.</div>
-        <div class="teams-row">
-            <span>Guadalajara</span>
-            <div class="options" data-match="7">
-                <button onclick="toggleOption(this, 7, 'L')">L</button>
-                <button onclick="toggleOption(this, 7, 'E')">E</button>
-                <button onclick="toggleOption(this, 7, 'V')">V</button>
-            </div>
-            <span>Pumas</span>
-        </div>
-    </div>
-
-    <!-- Partido 8 -->
-    <div class="match">
-        <div class="datetime">13/09/26 - 7:00 p.m.</div>
-        <div class="teams-row">
-            <span>Santos</span>
-            <div class="options" data-match="8">
-                <button onclick="toggleOption(this, 8, 'L')">L</button>
-                <button onclick="toggleOption(this, 8, 'E')">E</button>
-                <button onclick="toggleOption(this, 8, 'V')">V</button>
-            </div>
-            <span>Juárez</span>
-        </div>
-    </div>
-
-    <!-- Partido 9 -->
-    <div class="match">
-        <div class="datetime">13/09/26 - 9:00 p.m.</div>
-        <div class="teams-row">
-            <span>Monterrey</span>
-            <div class="options" data-match="9">
-                <button onclick="toggleOption(this, 9, 'L')">L</button>
-                <button onclick="toggleOption(this, 9, 'E')">E</button>
-                <button onclick="toggleOption(this, 9, 'V')">V</button>
-            </div>
-            <span>Tigres</span>
-        </div>
-    </div>
-
-    <div class="info">INFORMES: +52 984 279 4702</div>
-
-    <!-- Input Nombre -->
-    <input type="text" id="nombre" placeholder="NOMBRE DEL PARTICIPANTE">
-
-    <!-- Botón Enviar WhatsApp -->
-    <button class="btn-whatsapp" onclick="enviarQuiniela()">Enviar por WhatsApp</button>
+    <a href="#" class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp</a>
 </div>
 
 <script>
     let selections = {};
-
-    function toggleOption(button, matchNum, choice) {
-        if (!selections[matchNum]) {
-            selections[matchNum] = [];
-        }
-
-        let index = selections[matchNum].indexOf(choice);
-
-        if (index > -1) {
-            // Si ya estaba seleccionado, lo quitamos
-            selections[matchNum].splice(index, 1);
-            button.classList.remove('selected');
-        } else {
-            // Si intenta seleccionar el tercero (código de error / límite)
-            if (selections[matchNum].length >= 2) {
-                alert("¡Error! Solo puedes elegir máximo selección doble (2 opciones) por partido.");
-                return;
-            }
-            // Si pasa, agregamos la selección
-            selections[matchNum].push(choice);
-            button.classList.add('selected');
-        }
-
-        calcularTotal();
+    function selectOption(btn, matchId, choice) {
+        let parent = btn.parentElement;
+        parent.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selections[matchId] = choice;
     }
 
-    function calcularTotal() {
-        let totalPartidosConDoble = 0;
-        for (let m in selections) {
-            if (selections[m].length === 2) {
-                totalPartidosConDoble++;
-            }
+    function enviarWhatsApp() {
+        let mensaje = "¡Hola! Esta es mi quiniela de MagnoQuinielasMx:%0A";
+        for (let match in selections) {
+            mensaje += `- Partido ${match}: ${selections[match]}%0A`;
         }
-        // Precio base 25 más 25 extra por cada partido que tenga doble selección
-        let costoTotal = 25 + (totalPartidosConDoble * 25);
-        document.getElementById('displayCosto').innerText = "Total a Pagar: $" + costoTotal + ".00";
-    }
-
-    function enviarQuiniela() {
-        let nombre = document.getElementById('nombre').value.trim();
-        if (!nombre) {
-            alert("Por favor escribe tu nombre.");
-            return;
-        }
-
-        let partidosNombres = [
-            "Necaxa vs Puebla",
-            "Atlante vs Pachuca",
-            "Tijuana vs Querétaro",
-            "Toluca vs Atlas",
-            "León vs San Luis",
-            "Cruz Azul vs América",
-            "Guadalajara vs Pumas",
-            "Santos vs Juárez",
-            "Monterrey vs Tigres"
-        ];
-        
-        let mensaje = `*MAGNO QUINIELAS MX*%0A*Participante:* ${nombre}%0A`;
-        
-        for (let i = 1; i <= 9; i++) {
-            let seleccionStr = 'X';
-            if (selections[i] && selections[i].length > 0) {
-                seleccionStr = selections[i].sort().join('-');
-            }
-            mensaje += `${i}. ${partidosNombres[i-1]}: ${seleccionStr}%0A`;
-        }
-
-        let totalPartidosConDoble = 0;
-        for (let m in selections) {
-            if (selections[m].length === 2) totalPartidosConDoble++;
-        }
-        let costoFinal = 25 + (totalPartidosConDoble * 25);
-        
-        mensaje += `%0A*Total a pagar:* $${costoFinal}.00`;
-
-        let tuNumeroWhatsApp = "5219842794702"; 
-        let url = `https://wa.me/${tuNumeroWhatsApp}?text=${mensaje}`;
+        let telefono = "5219842794702
+        "; // Cambia esto por tu número de WhatsApp
+        let url = `https://wa.me/${telefono}?text=${mensaje}`;
         window.open(url, '_blank');
     }
 </script>
