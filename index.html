@@ -207,6 +207,27 @@
             padding: 14px;
             font-size: 1.15em;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        /* Estilo para el botón de ayuda de WhatsApp */
+        .btn-help-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .btn-help-whatsapp img {
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -257,7 +278,13 @@
             <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
         </div>
         
-        <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar por WhatsApp 📱</button>
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp 📱</button>
+        
+        <!-- Botón de Ayuda / Más Información directo a tu WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            ¿Dudas? Más información sobre cómo se juega
+        </a>
     </div>
 </div>
 
@@ -405,7 +432,9 @@
         }
 
         mensaje += `\n*TOTAL: $${total}.00*`;
-        const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(mensaje)}`;
+        
+        // Número configurado automáticamente para recibir las quinielas: +52 984 279 4702
+        const url = `https://api.whatsapp.com/send?phone=5219842794702&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
 
