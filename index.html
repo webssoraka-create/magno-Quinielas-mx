@@ -196,8 +196,17 @@
     }
 
     function calcularTotal() {
-        let total = 100;
-        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
+        let seleccionados = 0;
+        partidos.forEach(p => {
+            const rad = document.querySelector(`input[name="m${p.id}"]:checked`);
+            if (rad) seleccionados++;
+        });
+        // Si quieres que cuente base fija o incremente por partido extra:
+        let total = 100; 
+        if(seleccionados > 8) {
+            total = 100 + ((seleccionados - 8) * 12.5); // Ajuste proporcional si pasa de 8
+        }
+        document.getElementById('total-display').innerText = `TOTAL: $${total.toFixed(2)}`;
     }
 
     function limpiarFormulario() {
@@ -231,7 +240,10 @@
             const pronostico = seleccionado ? seleccionado.value : '-';
             mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronostico}]*\n`;
         });
-        mensaje += `\n*TOTAL: $100.00*`;
+        let seleccionados = 0;
+        partidos.forEach(p => { if(document.querySelector(`input[name="m${p.id}"]:checked`)) seleccionados++; });
+        let total = seleccionados > 8 ? 100 + ((seleccionados - 8) * 12.5) : 100;
+        mensaje += `\n*TOTAL: $${total.toFixed(2)}*`;
         const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
