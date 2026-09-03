@@ -19,15 +19,15 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
-            border: 2px solid #DAA520;
+            border: 3px solid #006341; /* Verde patriótico */
         }
         .hero-banner {
             position: relative;
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
             color: white;
             text-align: center;
             padding: 22px 15px;
-            border-bottom: 3px solid #DAA520;
+            border-bottom: 4px solid #CE1126; /* Rojo patriótico */
         }
         .hero-banner img {
             width: 85px;
@@ -47,18 +47,19 @@
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD700;
+            color: #FFD100; /* Dorado / Amarillo bandera */
             font-weight: bold;
             letter-spacing: 1px;
         }
         .subheader {
-            background-color: #000;
-            color: #FFD700;
+            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor */
+            color: #000;
             text-align: center;
             padding: 8px;
-            font-size: 1em;
-            font-weight: bold;
+            font-size: 1.05em;
+            font-weight: 900;
             letter-spacing: 2px;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
         }
         .countdown-container {
             background-color: #0a0a0a;
@@ -67,7 +68,7 @@
             border-bottom: 2px solid #333;
         }
         .countdown-title {
-            color: #FFD700;
+            color: #FFD100;
             font-size: 0.8em;
             font-weight: bold;
             margin-bottom: 6px;
@@ -88,4 +89,331 @@
             text-align: center;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
         }
+        .time-number {
+            display: block;
+            color: #FFFFFF;
+            font-size: 1.2em;
+            font-weight: 900;
+            font-family: monospace;
+        }
+        .time-label {
+            display: block;
+            color: #AAAAAA;
+            font-size: 0.6em;
+            margin-top: 2px;
+            text-transform: uppercase;
+        }
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9em;
+        }
+        .team {
+            width: 35%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .team.right {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .team img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+        .options {
+            display: flex;
+            gap: 5px;
+        }
+        .options label {
+            border: 1px solid #ccc;
+            padding: 5px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            background: #f9f9f9;
+            font-weight: bold;
+        }
+        .options input {
+            display: none;
+        }
+        .options input:checked + span {
+            background-color: #006341; /* Verde selección */
+            color: white;
+            font-weight: bold;
+            padding: 3px 7px;
+            border-radius: 4px;
+        }
+        .info-bar {
+            background: linear-gradient(90deg, #006341, #CE1126);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.82em;
+        }
+        .form-section {
+            padding: 15px;
+            background-color: #fafafa;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1.05em;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        .total-box {
+            border: 2px solid #006341;
+            background-color: #e8f5e9;
+            color: #006341;
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+        .btn-clear { background-color: #CE1126; }
+        .btn-random { background-color: #34495e; }
+        .btn-whatsapp {
+            background-color: #006341;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.15em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero-banner">
+        <img src="magno quinielas mx.png" alt="Logo Magno Quinielas MX" onerror="this.style.display='none'">
+        <h1>MAGNO QUINIELAS MX</h1>
+        <p>Tus pronósticos valen oro</p>
+    </div>
+    <div class="subheader">🇲🇽 MEDIA SEMANA 🇲🇽</div>
+
+    <div class="countdown-container">
+        <div class="countdown-title">Cierre de Quiniela</div>
+        <div class="countdown-boxes">
+            <div class="time-box">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">Días</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">Horas</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">Min</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">Seg</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="matches-container"></div>
+
+    <div class="info-bar">
+        BASE: $100.00 (8 PARTIDOS) | CIERRE: 11 DE SEPT. 3:30 P. M.
+    </div>
+
+    <div class="form-section">
+        <input type="text" id="participant-name" placeholder="NOMBRE DEL PARTICIPANTE">
+        <div class="total-box" id="total-display">TOTAL: $100.00</div>
         
+        <div class="btn-container">
+            <button class="btn-clear" onclick="limpiarFormulario()">Limpiar</button>
+            <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
+        </div>
+        
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar por WhatsApp 📱</button>
+    </div>
+</div>
+
+<script>
+    const partidos = [
+        { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
+        { id: 2, local: "Chivas", escL: "219 (3).png", visita: "Pumas", escV: "pumas-unam-logo-png_seeklogo-177354.png" },
+        { id: 3, local: "Monterrey", escL: "500px-Club_de_Fútbol_Monterrey_logo.svg.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
+        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "León", escV: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg" },
+        { id: 5, local: "Santos", escL: "santos-laguna-logo-footylogos-1200.webp", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
+        { id: 6, local: "Atlas", escL: "250px-Fútbol_Club_Atlas.svg.png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.svg.png" },
+        { id: 7, local: "Juárez", escL: "fc-juarez.png", visita: "Tijuana", escV: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png" },
+        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" }
+    ];
+
+    function renderPartidos() {
+        const container = document.getElementById('matches-container');
+        container.innerHTML = '';
+        partidos.forEach(p => {
+            container.innerHTML += `
+                <div class="match-row">
+                    <div class="team">
+                        <img src="${p.escL}" alt="${p.local}">
+                        <span>${p.local}</span>
+                    </div>
+                    <div class="options">
+                        <label><input type="checkbox" name="m${p.id}" value="L" onchange="verificarLimiteYCalcular(this)"><span>L</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="E" onchange="verificarLimiteYCalcular(this)"><span>E</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="V" onchange="verificarLimiteYCalcular(this)"><span>V</span></label>
+                    </div>
+                    <div class="team right">
+                        <span>${p.visita}</span>
+                        <img src="${p.escV}" alt="${p.visita}">
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function verificarLimiteYCalcular(element) {
+        let seleccionadosTotales = 0;
+        partidos.forEach(p => {
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            seleccionadosTotales += checks.length;
+        });
+
+        // 8 partidos base + 4 extras máximos = 12 selecciones totales permitidas
+        if (seleccionadosTotales > 12) {
+            alert("⚠️ Límite máximo alcanzado: Solo se permiten hasta 4 dobles/triples (extras) por $400.00.");
+            element.checked = false;
+        }
+        calcularTotal();
+    }
+
+    function calcularTotal() {
+        let total = 100;
+        let seleccionadosTotales = 0;
+
+        partidos.forEach(p => {
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            seleccionadosTotales += checks.length;
+        });
+
+        if (seleccionadosTotales > 8) {
+            let extras = seleccionadosTotales - 8;
+            if (extras === 1) total = 125;       // 1er extra: $25 (Total $125)
+            else if (extras === 2) total = 150;  // 2do extra: $50 (Total $150)
+            else if (extras === 3) total = 200;  // 3er extra: $100 (Total $200)
+            else if (extras >= 4) total = 400;   // 4to extra: $200 (Total $400 - Límite Máximo)
+        }
+
+        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
+    }
+
+    function limpiarFormulario() {
+        document.getElementById('participant-name').value = '';
+        partidos.forEach(p => {
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]`);
+            checks.forEach(c => c.checked = false);
+        });
+        calcularTotal();
+    }
+
+    function selecciónAleatoria() {
+        limpiarFormulario();
+        partidos.forEach(p => {
+            const opciones = ['L', 'E', 'V'];
+            const aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
+            const checkSeleccionado = document.querySelector(`input[name="m${p.id}"][value="${aleatorio}"]`);
+            if (checkSeleccionado) checkSeleccionado.checked = true;
+        });
+        calcularTotal();
+    }
+
+    function actualizarCronometro() {
+        const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
+        const ahora = new Date().getTime();
+        const diferencia = fechaCierre - ahora;
+
+        if (diferencia < 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
+            return;
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(dias).padStart(2, '0');
+        document.getElementById('hours').innerText = String(horas).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
+    }
+
+    setInterval(actualizarCronometro, 1000);
+
+    function enviarWhatsApp() {
+        const nombre = document.getElementById('participant-name').value.trim();
+        if(!nombre) {
+            alert('Por favor ingresa tu nombre');
+            return;
+        }
+        let mensaje = `*🇲🇽 MAGNO QUINIELAS MX 🇲🇽*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
+        let seleccionadosTotales = 0;
+        
+        partidos.forEach(p => {
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            let pronosticos = Array.from(checks).map(c => c.value).join('/');
+            if(!pronosticos) pronosticos = '-';
+            else seleccionadosTotales += checks.length;
+            mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronosticos}]*\n`;
+        });
+
+        let total = 100;
+        if (seleccionadosTotales > 8) {
+            let extras = seleccionadosTotales - 8;
+            if (extras === 1) total = 125;
+            else if (extras === 2) total = 150;
+            else if (extras === 3) total = 200;
+            else if (extras >= 4) total = 400;
+        }
+
+        mensaje += `\n*TOTAL: $${total}.00*`;
+        const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(mensaje)}`;
+        window.open(url, '_blank');
+    }
+
+    window.onload = function() {
+        renderPartidos();
+        actualizarCronometro();
+    };
+</script>
+
+</body>
+</html>
