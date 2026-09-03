@@ -13,7 +13,7 @@
         .header h2 { margin: 0; font-size: 22px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 1px; }
         .sub-header { background: #111; color: #ffcc00; text-align: center; padding: 6px; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
         
-        /* Tabla de partidos limpia y ordenada */
+        /* Tabla de partidos */
         .match-table { width: 100%; border-collapse: collapse; }
         .match-row { border-bottom: 1px solid #e0e0e0; }
         .match-row td { padding: 6px 2px; text-align: center; font-size: 11px; vertical-align: middle; }
@@ -22,25 +22,26 @@
         .team-left { width: 28%; font-weight: bold; text-align: right; padding-right: 2px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .team-right { width: 28%; font-weight: bold; text-align: left; padding-left: 2px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .logo-img { width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin: 0 2px; }
+        .logo-img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin: 0 2px; }
         
-        /* Botones L, E, V separados */
+        /* Botones L, E, V */
         .btn-col { width: 10%; }
-        .lev-btn { width: 28px; height: 28px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 11px; border-radius: 4px; cursor: pointer; transition: 0.1s; }
+        .lev-btn { width: 26px; height: 26px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 10px; border-radius: 4px; cursor: pointer; transition: 0.1s; }
         .lev-btn.selected-l { background: #cc0000 !important; color: white !important; border-color: #990000; }
         .lev-btn.selected-e { background: #555 !important; color: white !important; border-color: #333; }
         .lev-btn.selected-v { background: #0b6623 !important; color: white !important; border-color: #053312; }
         
         .vs-col { width: 4%; font-size: 9px; color: #888; font-weight: bold; }
 
-        /* Barra de info y precios */
+        /* Barra de info */
         .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 13px; display: flex; justify-content: space-around; }
         
-        /* Sección de controles y total */
+        /* Controles */
         .form-section { padding: 12px; background: #f4f6f9; border-top: 1px solid #ddd; }
         .input-name { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; margin-bottom: 10px; text-align: center; font-weight: bold; }
         
         .total-display { text-align: center; font-size: 18px; font-weight: bold; color: #0b6623; margin-bottom: 10px; background: #fff; padding: 6px; border-radius: 4px; border: 1px dashed #0b6623; }
+        .total-display.limit-reached { color: #c0392b; border-color: #c0392b; }
         
         .action-buttons { display: flex; gap: 6px; margin-bottom: 10px; }
         .btn-action { flex: 1; padding: 8px; font-weight: bold; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; color: white; }
@@ -48,6 +49,7 @@
         .btn-aleatorio { background: #34495e; }
         
         .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; border: none; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        .btn-whatsapp:disabled { background: #bdc3c7; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -59,26 +61,25 @@
     <div class="sub-header">MEDIA SEMANA</div>
 
     <table class="match-table" id="tablaPartidos">
-        <!-- Se generan los partidos dinámicamente -->
-    </table>
+        </table>
 
     <div class="info-bar">
         <span>PRECIO: $25.00</span>
-        <span>CIERRE:viernes 11 de septiembre 11
-        4:00 P. M.</span>
+        <span>CIERRE: VIERNES 11:00 P. M.</span>
     </div>
 
     <div class="form-section">
         <input type="text" id="nombrePart" class="input-name" placeholder="NOMBRE DEL PARTICIPANTE">
         
-        <div class="total-display" id="displayTotal">TOTAL: $25.00</div>
+        <div class="total-display" id="displayTotal">TOTAL: $0.00</div>
+        <p id="msgLimit" style="color: #c0392b; font-weight: bold; text-align: center; display: none; margin-top: -8px; font-size: 12px;">⚠️ Límite de quinielas alcanzado (11 partidos)</p>
 
         <div class="action-buttons">
             <button class="btn-action btn-limpiar" onclick="limpiarQuiniela()">Limpiar</button>
             <button class="btn-action btn-aleatorio" onclick="generarAleatorio()">Aleatorio</button>
         </div>
 
-        <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar por WhatsApp 📱</button>
+        <button class="btn-whatsapp" id="btnEnviar" onclick="enviarWhatsApp()" disabled>Enviar por WhatsApp 📱</button>
     </div>
 </div>
 
@@ -91,17 +92,30 @@
         { id: 5, local: "Santos", escLocal: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Santos_Laguna_logo.svg", visita: "Pachuca", escVisita: "https://upload.wikimedia.org/wikipedia/commons/5/51/CF_Pachuca_logo.svg" },
         { id: 6, local: "Atlas", escLocal: "https://upload.wikimedia.org/wikipedia/commons/0/09/Atlas_Guadalajara_logo.svg", visita: "Necaxa", escVisita: "https://upload.wikimedia.org/wikipedia/commons/2/22/Club_Necaxa_logo.svg" },
         { id: 7, local: "Juárez", escLocal: "https://upload.wikimedia.org/wikipedia/commons/4/4b/FC_Ju%C3%A1rez_logo.svg", visita: "Tijuana", escVisita: "https://upload.wikimedia.org/wikipedia/commons/7/73/Club_Tijuana_logo.svg" },
-        { id: 8, local: "Puebla", escLocal: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Club_Puebla_logo.svg", visita: "San Luis", escVisita: "https://upload.wikimedia.org/wikipedia/commons/8/86/Club_Atletico_de_San_Luis_logo.svg" }
+        { id: 8, local: "Puebla", escLocal: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Club_Puebla_logo.svg", visita: "San Luis", escVisita: "https://upload.wikimedia.org/wikipedia/commons/8/86/Club_Atletico_de_San_Luis_logo.svg" },
+        /* Adicionales --> */
+        { id: 9, local: "Equipo 9 L", escLocal: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg", visita: "Equipo 9 V", escVisita: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg" },
+        { id: 10, local: "Equipo 10 L", escLocal: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg", visita: "Equipo 10 V", escVisita: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg" },
+        { id: 11, local: "Equipo 11 L", escLocal: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg", visita: "Equipo 11 V", escVisita: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Escudo_de_la_Liga_MX.svg" }
     ];
 
-    const PRECIO_BASE = 25.00;
-    let selections = {}; // Guardará las selecciones por partido (ej: {1: ['L', 'E']})
+    // Configuración de precios y límites
+    const LIMITE_PARTIDOS = 11; // 8 base + 3 adicionales
+    const PRECIO_BASE = 25;     // Por los 8 partidos base
+    const PRECIO_ADICIONAL_1 = 25; // Partido 9
+    const PRECIO_ADICIONAL_2 = 25; // Partido 10
+    const PRECIO_ADICIONAL_3 = 50; // Partido 11
+
+    let selections = {};
 
     function construirTabla() {
         let html = '';
         partidos.forEach(p => {
+            // Partidos adicionales ocultos por defecto
+            let rowStyle = (p.id > 8) ? 'display: none;' : '';
+            
             html += `
-                <tr class="match-row" id="row-${p.id}">
+                <tr class="match-row" id="row-${p.id}" style="${rowStyle}">
                     <td class="team-left">${p.local} <img src="${p.escLocal}" class="logo-img" alt=""></td>
                     <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'L', this)">L</button></td>
                     <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'E', this)">E</button></td>
@@ -115,19 +129,16 @@
     }
 
     function toggleOpt(matchId, choice, btn) {
-        if (!selections[matchId]) {
-            selections[matchId] = [];
-        }
+        if (!selections[matchId]) selections[matchId] = [];
 
         let index = selections[matchId].indexOf(choice);
         if (index > -1) {
-            // Si ya estaba seleccionado, lo quitamos
             selections[matchId].splice(index, 1);
             if (choice === 'L') btn.classList.remove('selected-l');
             if (choice === 'E') btn.classList.remove('selected-e');
             if (choice === 'V') btn.classList.remove('selected-v');
         } else {
-            // Permitimos hasta 2 opciones por partido (dobles)
+            // Permitir dobles marcando 2 opciones
             if (selections[matchId].length >= 2) {
                 alert('Solo puedes seleccionar máximo 2 opciones por partido (dobles).');
                 return;
@@ -138,83 +149,28 @@
             if (choice === 'V') btn.classList.add('selected-v');
         }
 
+        manejarLogicaAdicionales();
         actualizarTotal();
     }
 
-    function actualizarTotal() {
-        let totalPartidosLlenos = 0;
-        let extrasCount = 0;
-
-        partidos.forEach(p => {
-            let sel = selections[p.id] || [];
-            if (sel.length > 0) {
-                totalPartidosLlenos++;
-                // Si puso doble opción en un partido, cuenta como un adicional
-                if (sel.length > 1) {
-                    extrasCount += (sel.length - 1);
-                }
-            }
-        });
-
-        // Cada quiniela base de 8 partidos cuesta $25, y cada adicional suma $25
-        let total = PRECIO_BASE + (extrasCount * PRECIO_BASE);
-        if (totalPartidosLlenos === 0) total = 0;
-
-        document.getElementById('displayTotal').innerText = `TOTAL: $${total}.00`;
-    }
-
-    function limpiarQuiniela() {
-        selections = {};
-        document.querySelectorAll('.lev-btn').forEach(b => b.className = 'lev-btn');
-        document.getElementById('nombrePart').value = '';
-        actualizarTotal();
-    }
-
-    function generarAleatorio() {
-        limpiarQuiniela();
-        const opciones = ['L', 'E', 'V'];
-        partidos.forEach(p => {
-            let aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
-            // Simulamos el clic mediante código
-            let row = document.getElementById(`row-${p.id}`);
-            let btnIndex = aleatorio === 'L' ? 0 : (aleatorio === 'E' ? 1 : 2);
-            let targetBtn = row.querySelectorAll('.lev-btn')[btnIndex];
-            toggleOpt(p.id, aleatorio, targetBtn);
-        });
-    }
-
-    function enviarWhatsApp() {
-        let nombre = document.getElementById('nombrePart').value.trim();
-        if(!nombre) {
-            alert('Por escribe tu nombre antes de enviar');
-            return;
+    function manejarLogicaAdicionales() {
+        // Mostrar el partido 9 si se llena el 8
+        if (selections[8] && selections[8].length > 0) {
+            document.getElementById('row-9').style.display = '';
+        } else {
+            document.getElementById('row-9').style.display = 'none';
+            delete selections[9]; // Limpiar selección si se borra el 8
+            document.querySelectorAll('#row-9 .lev-btn').forEach(b => b.className = 'lev-btn');
         }
 
-        let mensaje = `*Quiniela de: ${nombre}*%0A`;
-        
-        partidos.forEach(p => {
-            let sel = selections[p.id];
-            let resultadoTexto = (sel && sel.length > 0) ? sel.join('-') : 'Falta';
-            mensaje += `- Partido ${p.id} (${p.local} vs ${p.visita}): *${resultadoTexto}*%0A`;
-        });
+        // Mostrar el 10 si se llena el 9
+        if (selections[9] && selections[9].length > 0) {
+            document.getElementById('row-10').style.display = '';
+        } else {
+            document.getElementById('row-10').style.display = 'none';
+            delete selections[10];
+            document.querySelectorAll('#row-10 .lev-btn').forEach(b => b.className = 'lev-btn');
+        }
 
-        // Calcular total actual para el mensaje
-        let extrasCount = 0;
-        partidos.forEach(p => {
-            let sel = selections[p.id] || [];
-            if (sel.length > 1) extrasCount += (sel.length - 1);
-        });
-        let totalPagar = PRECIO_BASE + (extrasCount * PRECIO_BASE);
-
-        mensaje += `%0A*Total a pagar: $${totalPagar}.00*`;
-
-        let telefono = "5219842794702";
-        let url = `https://wa.me/${telefono}?text=${mensaje}`;
-        window.open(url, '_blank');
-    }
-
-    construirTabla();
-</script>
-
-</body>
-</html>
+        // Mostrar el
+    
