@@ -13,14 +13,15 @@
         .header h2 { margin: 0; font-size: 22px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 1px; }
         .sub-header { background: #111; color: #ffcc00; text-align: center; padding: 6px; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
         
-        /* Tabla de partidos */
+        /* Tabla de partidos limpia sin VS */
         .match-table { width: 100%; border-collapse: collapse; }
         .match-row { border-bottom: 1px solid #e0e0e0; }
         .match-row td { padding: 6px 4px; text-align: center; font-size: 11px; vertical-align: middle; }
         .match-row:nth-child(even) { background-color: #fafafa; }
         
-        .team-left { width: 30%; font-weight: bold; text-align: right; padding-right: 4px; font-size: 11px; color: #111; }
-        .team-right { width: 30%; font-weight: bold; text-align: left; padding-left: 4px; font-size: 11px; color: #111; }
+        .team-left { width: 34%; font-weight: bold; text-align: right; padding-right: 4px; font-size: 11px; color: #111; }
+        .team-right { width: 34%; font-weight: bold; text-align: left; padding-left: 4px; font-size: 11px; color: #111; }
+        .logo-img { width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin: 0 3px; }
         
         /* Botones L, E, V */
         .btn-col { width: 8%; }
@@ -28,14 +29,16 @@
         .lev-btn.selected-l { background: #cc0000 !important; color: white !important; border-color: #990000; }
         .lev-btn.selected-e { background: #555 !important; color: white !important; border-color: #333; }
         .lev-btn.selected-v { background: #0b6623 !important; color: white !important; border-color: #053312; }
-        
-        .vs-col { width: 8%; font-size: 9px; color: #777; font-weight: bold; }
+
+        /* Sección de Quinielas Adicionales */
+        .adicionales-section { background: #fdfefe; padding: 10px 15px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; }
+        .adicionales-section select { padding: 5px; font-weight: bold; border-radius: 4px; border: 1px solid #bbb; background: #fff; }
 
         /* Barra de info */
-        .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 13px; display: flex; justify-content: space-around; }
+        .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 12px; display: flex; justify-content: space-around; }
         
         /* Controles */
-        .form-section { padding: 12px; background: #f4f6f9; border-top: 1px solid #ddd; }
+        .form-section { padding: 12px; background: #f4f6f9; }
         .input-name { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; margin-bottom: 10px; text-align: center; font-weight: bold; }
         
         .total-display { text-align: center; font-size: 18px; font-weight: bold; color: #0b6623; margin-bottom: 5px; background: #fff; padding: 6px; border-radius: 4px; border: 1px dashed #0b6623; }
@@ -57,19 +60,28 @@
     <div class="sub-header">MEDIA SEMANA</div>
 
     <table class="match-table" id="tablaPartidos">
-        <!-- Se generan los partidos dinámicamente -->
+        <!-- Partidos generados por código -->
     </table>
+
+    <div class="adicionales-section">
+        <span>Quinielas Adicionales:</span>
+        <select id="selectAdicionales" onchange="actualizarTotal()">
+            <option value="0">Ninguna (Base $25)</option>
+            <option value="1">1 Adicional (+$25 = $50)</option>
+            <option value="2">2 Adicionales (+$50 = $75)</option>
+            <option value="3">3 Adicionales (+$100 = $125 máx)</option>
+        </select>
+    </div>
 
     <div class="info-bar">
         <span>BASE: $25.00 (8 PARTIDOS)</span>
-        <span>CIERRE: VIERNES 11:00 P. M.</span>
+        <span>CIERRE: 11 de Sep VIERNES 11:00 P. M.</span>
     </div>
 
     <div class="form-section">
         <input type="text" id="nombrePart" class="input-name" placeholder="NOMBRE DEL PARTICIPANTE">
         
-        <div class="total-display" id="displayTotal">TOTAL: $0.00</div>
-        <p id="msgLimit" style="color: #c0392b; font-weight: bold; text-align: center; display: none; margin: 4px 0; font-size: 11px;">⚠️ Límite de 3 adicionales alcanzado (11 partidos en total)</p>
+        <div class="total-display" id="displayTotal">TOTAL: $25.00</div>
 
         <div class="action-buttons">
             <button class="btn-action btn-limpiar" onclick="limpiarQuiniela()">Limpiar</button>
@@ -82,18 +94,14 @@
 
 <script>
     const partidos = [
-        { id: 1, local: "América", visita: "Cruz Azul" },
-        { id: 2, local: "Chivas", visita: "Pumas" },
-        { id: 3, local: "Monterrey", visita: "Tigres" },
-        { id: 4, local: "Toluca", visita: "León" },
-        { id: 5, local: "Santos", visita: "Pachuca" },
-        { id: 6, local: "Atlas", visita: "Necaxa" },
-        { id: 7, local: "Juárez", visita: "Tijuana" },
-        { id: 8, local: "Puebla", visita: "San Luis" },
-        // Adicionales
-        { id: 9, local: "Adicional 1 (L)", visita: "Adicional 1 (V)" },
-        { id: 10, local: "Adicional 2 (L)", visita: "Adicional 2 (V)" },
-        { id: 11, local: "Adicional 3 (L)", visita: "Adicional 3 (V)" }
+        { id: 1, local: "América", escLocal: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_Am%C3%A9rica.svg", visita: "Cruz Azul", escVisita: "https://upload.wikimedia.org/wikipedia/commons/5/58/Logo_Cruz_Azul.svg" },
+        { id: 2, local: "Chivas", escLocal: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Logo_Guadalajara_-_Chivas.svg", visita: "Pumas", escVisita: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_Pumas_UNAM.svg" },
+        { id: 3, local: "Monterrey", escLocal: "https://upload.wikimedia.org/wikipedia/commons/2/23/Logo_de_Rayados_de_Monterrey.svg", visita: "Tigres", escVisita: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Logo_Tigres_UANL.svg" },
+        { id: 4, local: "Toluca", escLocal: "https://upload.wikimedia.org/wikipedia/commons/0/07/Deportivo_Toluca_F.C._logo.svg", visita: "León", escVisita: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Club_Le%C3%B3n_logo.svg" },
+        { id: 5, local: "Santos", escLocal: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Santos_Laguna_logo.svg", visita: "Pachuca", escVisita: "https://upload.wikimedia.org/wikipedia/commons/5/51/CF_Pachuca_logo.svg" },
+        { id: 6, local: "Atlas", escLocal: "https://upload.wikimedia.org/wikipedia/commons/0/09/Atlas_Guadalajara_logo.svg", visita: "Necaxa", escVisita: "https://upload.wikimedia.org/wikipedia/commons/2/22/Club_Necaxa_logo.svg" },
+        { id: 7, local: "Juárez", escLocal: "https://upload.wikimedia.org/wikipedia/commons/4/4b/FC_Ju%C3%A1rez_logo.svg", visita: "Tijuana", escVisita: "https://upload.wikimedia.org/wikipedia/commons/7/73/Club_Tijuana_logo.svg" },
+        { id: 8, local: "Puebla", escLocal: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Club_Puebla_logo.svg", visita: "San Luis", escVisita: "https://upload.wikimedia.org/wikipedia/commons/8/86/Club_Atletico_de_San_Luis_logo.svg" }
     ];
 
     let selections = {};
@@ -101,15 +109,13 @@
     function construirTabla() {
         let html = '';
         partidos.forEach(p => {
-            let rowStyle = (p.id > 8) ? 'display: none;' : '';
             html += `
-                <tr class="match-row" id="row-${p.id}" style="${rowStyle}">
-                    <td class="team-left">${p.local}</td>
+                <tr class="match-row" id="row-${p.id}">
+                    <td class="team-left">${p.local} <img src="${p.escLocal}" class="logo-img" alt=""></td>
                     <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'L', this)">L</button></td>
                     <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'E', this)">E</button></td>
                     <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'V', this)">V</button></td>
-                    <td class="vs-col">VS</td>
-                    <td class="team-right">${p.visita}</td>
+                    <td class="team-right"><img src="${p.escVisita}" class="logo-img" alt=""> ${p.visita}</td>
                 </tr>
             `;
         });
@@ -136,53 +142,26 @@
             if (choice === 'V') btn.classList.add('selected-v');
         }
 
-        actualizarFlujoYTotal();
+        actualizarTotal();
     }
 
-    function actualizarFlujoYTotal() {
-        let r8 = selections[8] && selections[8].length > 0;
-        let r9 = selections[9] && selections[9].length > 0;
-        let r10 = selections[10] && selections[10].length > 0;
+    function actualizarTotal() {
+        let extras = parseInt(document.getElementById('selectAdicionales').value);
+        let total = 25; // Base
 
-        let row9 = document.getElementById('row-9');
-        let row10 = document.getElementById('row-10');
-        let row11 = document.getElementById('row-11');
+        if (extras === 1) total = 50;       // 25 base + 25 adic
+        else if (extras === 2) total = 75;  // 25 base + 50 adic
+        else if (extras === 3) total = 125; // 25 base + 100 adic (50 en la 3era)
 
-        if(row9) row9.style.display = r8 ? '' : 'none';
-        if(row10) row10.style.display = r9 ? '' : 'none';
-        if(row11) row11.style.display = r10 ? '' : 'none';
-
-        if (!r8) { delete selections[9]; delete selections[10]; delete selections[11]; }
-        else if (!r9) { delete selections[10]; delete selections[11]; }
-        else if (!r10) { delete selections[11]; }
-
-        let total = 0;
-        let partidosLlenos = 0;
-
-        for (let i = 1; i <= 11; i++) {
-            if (selections[i] && selections[i].length > 0) partidosLlenos++;
-        }
-
-        if (partidosLlenos > 0) {
-            total = 25; // Base
-            if (partidosLlenos >= 9) total += 25;  // 1er adicional
-            if (partidosLlenos >= 10) total += 25; // 2do adicional
-            if (partidosLlenos >= 11) total += 50; // 3er adicional
-        }
-
-        let displayTotal = document.getElementById('displayTotal');
-        if(displayTotal) displayTotal.innerText = `TOTAL: $${total}.00`;
-        
-        let msgLimit = document.getElementById('msgLimit');
-        if(msgLimit) msgLimit.style.display = (partidosLlenos >= 11) ? 'block' : 'none';
+        document.getElementById('displayTotal').innerText = `TOTAL: $${total}.00`;
     }
 
     function limpiarQuiniela() {
         selections = {};
         document.querySelectorAll('.lev-btn').forEach(b => b.className = 'lev-btn');
-        let nombreInput = document.getElementById('nombrePart');
-        if(nombreInput) nombreInput.value = '';
-        actualizarFlujoYTotal();
+        document.getElementById('selectAdicionales').value = "0";
+        document.getElementById('nombrePart').value = '';
+        actualizarTotal();
     }
 
     function generarAleatorio() {
@@ -191,45 +170,40 @@
         for(let i=1; i<=8; i++) {
             let aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
             let row = document.getElementById(`row-${i}`);
-            if(row) {
-                let btnIdx = aleatorio === 'L' ? 0 : (aleatorio === 'E' ? 1 : 2);
-                toggleOpt(i, aleatorio, row.querySelectorAll('.lev-btn')[btnIdx]);
-            }
+            let btnIdx = aleatorio === 'L' ? 0 : (aleatorio === 'E' ? 1 : 2);
+            toggleOpt(i, aleatorio, row.querySelectorAll('.lev-btn')[btnIdx]);
         }
     }
 
     function enviarWhatsApp() {
-        let nombreInput = document.getElementById('nombrePart');
-        let nombre = nombreInput ? nombreInput.value.trim() : '';
+        let nombre = document.getElementById('nombrePart').value.trim();
         if(!nombre) {
             alert('Por favor escribe tu nombre antes de enviar');
             return;
         }
 
-        let totalPartidos = 0;
-        for(let i=1; i<=11; i++) {
-            if(selections[i] && selections[i].length > 0) totalPartidos++;
+        let partidosLlenos = 0;
+        for(let i=1; i<=8; i++) {
+            if(selections[i] && selections[i].length > 0) partidosLlenos++;
         }
 
-        if(totalPartidos === 0) {
-            alert('Debes completar al menos los partidos de la quiniela');
+        if(partidosLlenos < 8) {
+            alert('Debes completar los 8 partidos de la quiniela principal');
             return;
         }
 
+        let extras = parseInt(document.getElementById('selectAdicionales').value);
         let mensaje = `*Quiniela de: ${nombre}*%0A`;
         
-        for(let i=1; i<=11; i++) {
-            let sel = selections[i];
-            if(sel && sel.length > 0) {
-                let resTexto = sel.join('-');
-                mensaje += `- ${partidos[i-1].local} vs ${partidos[i-1].visita}: *${resTexto}*%0A`;
-            }
+        for(let i=1; i<=8; i++) {
+            let resTexto = selections[i].join('-');
+            mensaje += `- ${partidos[i-1].local} vs ${partidos[i-1].visita}: *${resTexto}*%0A`;
         }
 
         let totalPagar = 25;
-        if (totalPartidos >= 9) totalPagar += 25;
-        if (totalPartidos >= 10) totalPagar += 25;
-        if (totalPartidos >= 11) totalPagar += 50;
+        if (extras === 1) { totalPagar = 50; mensaje += `%0A*(Incluye 1 Quiniela Adicional)*%0A`; }
+        if (extras === 2) { totalPagar = 75; mensaje += `%0A*(Incluye 2 Quinielas Adicionales)*%0A`; }
+        if (extras === 3) { totalPagar = 125; mensaje += `%0A*(Incluye 3 Quinielas Adicionales)*%0A`; }
 
         mensaje += `%0A*Total a pagar: $${totalPagar}.00*`;
 
@@ -238,7 +212,6 @@
         window.open(url, '_blank');
     }
 
-    // Ejecutar al cargar
     construirTabla();
 </script>
 
