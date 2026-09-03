@@ -13,25 +13,26 @@
         .header h2 { margin: 0; font-size: 22px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 1px; }
         .sub-header { background: #111; color: #ffcc00; text-align: center; padding: 6px; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
         
-        /* Tabla de partidos estilo tradicional L-E-V */
+        /* Tabla de partidos limpia y ordenada */
         .match-table { width: 100%; border-collapse: collapse; }
-        .match-row { border-bottom: 1px solid #ddd; }
-        .match-row td { padding: 8px 2px; text-align: center; font-size: 11px; vertical-align: middle; }
+        .match-row { border-bottom: 1px solid #e0e0e0; }
+        .match-row td { padding: 6px 2px; text-align: center; font-size: 11px; vertical-align: middle; }
         .match-row:nth-child(even) { background-color: #fafafa; }
         
-        .team-left { width: 32%; font-weight: bold; text-align: right; padding-right: 4px; display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
-        .team-right { width: 32%; font-weight: bold; text-align: left; padding-left: 4px; display: flex; align-items: center; justify-content: flex-start; gap: 4px; }
-        .team-left img, .team-right img { width: 22px; height: 22px; object-fit: contain; }
+        .team-left { width: 28%; font-weight: bold; text-align: right; padding-right: 2px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .team-right { width: 28%; font-weight: bold; text-align: left; padding-left: 2px; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         
-        .vs-col { width: 6%; font-size: 10px; color: #777; font-weight: bold; }
+        .logo-img { width: 20px; height: 20px; object-fit: contain; vertical-align: middle; margin: 0 2px; }
         
-        /* Botones L, E, V centrales */
+        /* Botones L, E, V separados */
         .btn-col { width: 10%; }
-        .lev-btn { width: 26px; height: 26px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 11px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .lev-btn { width: 28px; height: 28px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 11px; border-radius: 4px; cursor: pointer; transition: 0.1s; }
         .lev-btn.selected-l { background: #cc0000 !important; color: white !important; border-color: #990000; }
         .lev-btn.selected-e { background: #555 !important; color: white !important; border-color: #333; }
         .lev-btn.selected-v { background: #0b6623 !important; color: white !important; border-color: #053312; }
         
+        .vs-col { width: 4%; font-size: 9px; color: #888; font-weight: bold; }
+
         /* Barra de info y precios */
         .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 13px; display: flex; justify-content: space-around; }
         
@@ -58,11 +59,13 @@
     <div class="sub-header">MEDIA SEMANA</div>
 
     <table class="match-table" id="tablaPartidos">
-        </table>
+        <!-- Se generan los partidos dinámicamente -->
+    </table>
 
     <div class="info-bar">
-        <span id="txtPrecio">PRECIO: $25.00</span>
-        <span id="txtCierre">CIERRE: MARTES 11:00 P. M.</span>
+        <span>PRECIO: $25.00</span>
+        <span>CIERRE:viernes 11 de septiembre 11
+        4:00 P. M.</span>
     </div>
 
     <div class="form-section">
@@ -91,46 +94,73 @@
         { id: 8, local: "Puebla", escLocal: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Club_Puebla_logo.svg", visita: "San Luis", escVisita: "https://upload.wikimedia.org/wikipedia/commons/8/86/Club_Atletico_de_San_Luis_logo.svg" }
     ];
 
-    const PRECIO_QUINIELA = 25.00;
-    let selections = {};
+    const PRECIO_BASE = 25.00;
+    let selections = {}; // Guardará las selecciones por partido (ej: {1: ['L', 'E']})
 
     function construirTabla() {
         let html = '';
         partidos.forEach(p => {
             html += `
                 <tr class="match-row" id="row-${p.id}">
-                    <td class="team-left"><img src="${p.escLocal}" alt="${p.local}">${p.local}</td>
-                    <td class="btn-col"><button class="lev-btn" onclick="selectOpt(${p.id}, 'L')">L</button></td>
-                    <td class="btn-col"><button class="lev-btn" onclick="selectOpt(${p.id}, 'E')">E</button></td>
-                    <td class="btn-col"><button class="lev-btn" onclick="selectOpt(${p.id}, 'V')">V</button></td>
+                    <td class="team-left">${p.local} <img src="${p.escLocal}" class="logo-img" alt=""></td>
+                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'L', this)">L</button></td>
+                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'E', this)">E</button></td>
+                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'V', this)">V</button></td>
                     <td class="vs-col">VS</td>
-                    <td class="team-right"><img src="${p.escVisita}" alt="${p.visita}">${p.visita}</td>
+                    <td class="team-right"><img src="${p.escVisita}" class="logo-img" alt=""> ${p.visita}</td>
                 </tr>
             `;
         });
         document.getElementById('tablaPartidos').innerHTML = html;
     }
 
-    function selectOpt(matchId, choice) {
-        selections[matchId] = choice;
-        let row = document.getElementById(`row-${matchId}`);
-        let buttons = row.querySelectorAll('.lev-btn');
-        
-        buttons.forEach(b => b.className = 'lev-btn'); // Quitar selección previa en esa fila
+    function toggleOpt(matchId, choice, btn) {
+        if (!selections[matchId]) {
+            selections[matchId] = [];
+        }
 
-        // Asignar color según sea L (rojo), E (gris), V (verde)
-        if(choice === 'L') buttons[0].classList.add('selected-l');
-        if(choice === 'E') buttons[1].classList.add('selected-e');
-        if(choice === 'V') buttons[2].classList.add('selected-v');
+        let index = selections[matchId].indexOf(choice);
+        if (index > -1) {
+            // Si ya estaba seleccionado, lo quitamos
+            selections[matchId].splice(index, 1);
+            if (choice === 'L') btn.classList.remove('selected-l');
+            if (choice === 'E') btn.classList.remove('selected-e');
+            if (choice === 'V') btn.classList.remove('selected-v');
+        } else {
+            // Permitimos hasta 2 opciones por partido (dobles)
+            if (selections[matchId].length >= 2) {
+                alert('Solo puedes seleccionar máximo 2 opciones por partido (dobles).');
+                return;
+            }
+            selections[matchId].push(choice);
+            if (choice === 'L') btn.classList.add('selected-l');
+            if (choice === 'E') btn.classList.add('selected-e');
+            if (choice === 'V') btn.classList.add('selected-v');
+        }
 
         actualizarTotal();
     }
 
     function actualizarTotal() {
-        let respondidos = Object.keys(selections).length;
-        // La quiniela siempre cuesta sus $25 base al completarse los 8 partidos
-        let total = (respondidos > 0) ? PRECIO_QUINIELA : 0;
-        document.getElementById('displayTotal').innerText = `TOTAL: $${total}.00 (${respondidos}/8 partidos)`;
+        let totalPartidosLlenos = 0;
+        let extrasCount = 0;
+
+        partidos.forEach(p => {
+            let sel = selections[p.id] || [];
+            if (sel.length > 0) {
+                totalPartidosLlenos++;
+                // Si puso doble opción en un partido, cuenta como un adicional
+                if (sel.length > 1) {
+                    extrasCount += (sel.length - 1);
+                }
+            }
+        });
+
+        // Cada quiniela base de 8 partidos cuesta $25, y cada adicional suma $25
+        let total = PRECIO_BASE + (extrasCount * PRECIO_BASE);
+        if (totalPartidosLlenos === 0) total = 0;
+
+        document.getElementById('displayTotal').innerText = `TOTAL: $${total}.00`;
     }
 
     function limpiarQuiniela() {
@@ -145,30 +175,38 @@
         const opciones = ['L', 'E', 'V'];
         partidos.forEach(p => {
             let aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
-            selectOpt(p.id, aleatorio);
+            // Simulamos el clic mediante código
+            let row = document.getElementById(`row-${p.id}`);
+            let btnIndex = aleatorio === 'L' ? 0 : (aleatorio === 'E' ? 1 : 2);
+            let targetBtn = row.querySelectorAll('.lev-btn')[btnIndex];
+            toggleOpt(p.id, aleatorio, targetBtn);
         });
     }
 
     function enviarWhatsApp() {
         let nombre = document.getElementById('nombrePart').value.trim();
         if(!nombre) {
-            alert('Por favor escribe tu nombre antes de enviar');
-            return;
-        }
-        if(Object.keys(selections).length < partidos.length) {
-            alert('Te faltan partidos por pronosticar para completar la quiniela');
+            alert('Por escribe tu nombre antes de enviar');
             return;
         }
 
-        let mensaje = `⚽ *MAGNO QUINIELAS MX* ⚽%0A`;
-        mensaje += `👤 *Participante:* ${nombre}%0A%0A`;
+        let mensaje = `*Quiniela de: ${nombre}*%0A`;
         
         partidos.forEach(p => {
-            let res = selections[p.id] || '-';
-            mensaje += `${p.local} vs ${p.visita} ➡️ *[ ${res} ]*%0A`;
+            let sel = selections[p.id];
+            let resultadoTexto = (sel && sel.length > 0) ? sel.join('-') : 'Falta';
+            mensaje += `- Partido ${p.id} (${p.local} vs ${p.visita}): *${resultadoTexto}*%0A`;
         });
 
-        mensaje += `%0A💰 *Total a pagar:* $${PRECIO_QUINIELA}.00`;
+        // Calcular total actual para el mensaje
+        let extrasCount = 0;
+        partidos.forEach(p => {
+            let sel = selections[p.id] || [];
+            if (sel.length > 1) extrasCount += (sel.length - 1);
+        });
+        let totalPagar = PRECIO_BASE + (extrasCount * PRECIO_BASE);
+
+        mensaje += `%0A*Total a pagar: $${totalPagar}.00*`;
 
         let telefono = "5219842794702";
         let url = `https://wa.me/${telefono}?text=${mensaje}`;
