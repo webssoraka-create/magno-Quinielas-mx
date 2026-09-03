@@ -5,61 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magno Quinielas MX</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #eef2f5; margin: 0; padding: 5px; color: #333; }
-        .container { max-width: 480px; background: white; margin: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; }
-        
-        /* Cabecera */
-        .header { background: linear-gradient(135deg, #cc0000, #0b6623); padding: 12px; text-align: center; color: white; border-bottom: 3px solid #000; }
-        .header h2 { margin: 0; font-size: 22px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 1px; }
-        .sub-header { background: #111; color: #ffcc00; text-align: center; padding: 6px; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
-        
-        /* Tabla de partidos */
-        .match-table { width: 100%; border-collapse: collapse; }
-        .match-row { border-bottom: 1px solid #e0e0e0; }
-        .match-row td { padding: 6px 4px; text-align: center; font-size: 11px; vertical-align: middle; }
-        .match-row:nth-child(even) { background-color: #fafafa; }
-        
-        /* Orden: Logo + Nombre izquierdo / Nombre derecho + Logo */
-        .team-left { width: 34%; font-weight: bold; text-align: left; padding-left: 4px; font-size: 11px; color: #111; }
-        .team-right { width: 34%; font-weight: bold; text-align: right; padding-right: 4px; font-size: 11px; color: #111; }
-        .logo-img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin: 0 3px; background: transparent; }
-        
-        /* Botones L, E, V */
-        .btn-col { width: 8%; }
-        .lev-btn { width: 26px; height: 26px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 10px; border-radius: 4px; cursor: pointer; transition: 0.1s; }
-        .lev-btn.selected-l { background: #cc0000 !important; color: white !important; border-color: #990000; }
-        .lev-btn.selected-e { background: #555 !important; color: white !important; border-color: #333; }
-        .lev-btn.selected-v { background: #0b6623 !important; color: white !important; border-color: #053312; }
-
-        /* Barra de info */
-        .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 12px; display: flex; justify-content: space-around; margin-top: 5px; }
-        
-        /* Controles */
-        .form-section { padding: 12px; background: #f4f6f9; }
-        .input-name { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; margin-bottom: 10px; text-align: center; font-weight: bold; }
-        
-        .total-display { text-align: center; font-size: 18px; font-weight: bold; color: #0b6623; margin-bottom: 5px; background: #fff; padding: 6px; border-radius: 4px; border: 1px dashed #0b6623; }
-        .msg-limit { color: #c0392b; font-weight: bold; text-align: center; display: none; margin: 4px 0; font-size: 11px; }
-
-        .action-buttons { display: flex; gap: 6px; margin-bottom: 10px; }
-        .btn-action { flex: 1; padding: 8px; font-weight: bold; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; color: white; }
-        .btn-limpiar { background: #e74c3c; }
-        .btn-aleatorio { background: #34495e; }
-        
-        .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; border: none; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(to right, #8B0000, #006400);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .subheader {
+            background-color: #111;
+            color: #FFD700;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9em;
+        }
+        .team {
+            width: 35%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .team.right {
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .team img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .options {
+            display: flex;
+            gap: 4px;
+        }
+        .options label {
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        .options input {
+            display: none;
+        }
+        .options input:checked + span {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+        .info-bar {
+            background-color: #DAA520;
+            color: #111;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-section {
+            padding: 15px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .total-box {
+            border: 1px solid #28a745;
+            color: #28a745;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-clear { background-color: #d9534f; }
+        .btn-random { background-color: #34495e; }
+        .btn-whatsapp {
+            background-color: #28a745;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
-        <h2>MAGNO QUINIELAS MX</h2>
-    </div>
-    <div class="sub-header">MEDIA SEMANA</div>
+    <div class="header">MAGNO QUINIELAS MX</div>
+    <div class="subheader">MEDIA SEMANA</div>
 
-    <table class="match-table" id="tablaPartidos">
-        <!-- Partidos generados dinámicamente -->
-    </table>
+    <div id="matches-container"></div>
 
     <div class="info-bar">
         <span>BASE: $100.00 (8 PARTIDOS)</span>
@@ -67,165 +147,96 @@
     </div>
 
     <div class="form-section">
-        <input type="text" id="nombrePart" class="input-name" placeholder="NOMBRE DEL PARTICIPANTE">
+        <input type="text" id="participant-name" placeholder="NOMBRE DEL PARTICIPANTE">
+        <div class="total-box" id="total-display">TOTAL: $100.00</div>
         
-        <div class="total-display" id="displayTotal">TOTAL: $0.00</div>
-        <p id="msgLimit" class="msg-limit">⚠️ ¡Límite alcanzado! Solo puedes seleccionar máximo 3 adicionales.</p>
-
-        <div class="action-buttons">
-            <button class="btn-action btn-limpiar" onclick="limpiarQuiniela()">Limpiar</button>
-            <button class="btn-action btn-aleatorio" onclick="generarAleatorio()">Aleatorio</button>
+        <div class="btn-container">
+            <button class="btn-clear" onclick="limpiarFormulario()">Limpiar</button>
+            <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
         </div>
-
+        
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar por WhatsApp 📱</button>
     </div>
 </div>
 
 <script>
     const partidos = [
-        { id: 1, local: "América", escL: "https://resources.ligamx.net/i/Escudos/AMERICA.png", visita: "Cruz Azul", escV: "https://resources.ligamx.net/i/Escudos/CRUZAZUL.png" },
-        { id: 2, local: "Chivas", escL: "https://resources.ligamx.net/i/Escudos/GUADALAJARA.png", visita: "Pumas", escV: "https://resources.ligamx.net/i/Escudos/UNAM.png" },
-        { id: 3, local: "Monterrey", escL: "https://resources.ligamx.net/i/Escudos/MONTERREY.png", visita: "Tigres", escV: "https://resources.ligamx.net/i/Escudos/TIGRES.png" },
-        { id: 4, local: "Toluca", escL: "https://resources.ligamx.net/i/Escudos/TOLUCA.png", visita: "León", escV: "https://resources.ligamx.net/i/Escudos/LEON.png" },
-        { id: 5, local: "Santos", escL: "https://resources.ligamx.net/i/Escudos/SANTOS.png", visita: "Pachuca", escV: "https://resources.ligamx.net/i/Escudos/PACHUCA.png" },
-        { id: 6, local: "Atlas", escL: "https://resources.ligamx.net/i/Escudos/ATLAS.png", visita: "Necaxa", escV: "https://resources.ligamx.net/i/Escudos/NECAXA.png" },
-        { id: 7, local: "Juárez", escL: "https://resources.ligamx.net/i/Escudos/JUAREZ.png", visita: "Tijuana", escV: "https://resources.ligamx.net/i/Escudos/TIJUANA.png" },
-        { id: 8, local: "Puebla", escL: "https://resources.ligamx.net/i/Escudos/PUEBLA.png", visita: "San Luis", escV: "https://resources.ligamx.net/i/Escudos/SANLUIS.png" }
+        { id: 1, local: "América", escL: "04a814c4039eca50e7f7b3017a5a3a2a.png", visita: "Cruz Azul", escV: "219 (3).png" },
+        { id: 2, local: "Chivas", escL: "1280px-Guadalajara_Logo.png", visita: "Pumas", escV: "500px-UNAM.png" },
+        { id: 3, local: "Monterrey", escL: "1280px-Monterrey_Logo.png", visita: "Tigres", escV: "1280px-Tigres_UANL_Logo.png" },
+        { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.png", visita: "León", escV: "250px-Fútbol_Club_Atlético_San_Luis_logo.png" },
+        { id: 5, local: "Santos", escL: "500px-Santos_Laguna_Logo.png", visita: "Pachuca", escV: "1280px-Pachuca_Logo.png" },
+        { id: 6, local: "Atlas", escL: "219 (3).png", visita: "Necaxa", escV: "250px-Club_Necaxa_Logo.png" },
+        { id: 7, local: "Juárez", escL: "1280px-FC_Juárez_Logo.png", visita: "Tijuana", escV: "414-4142028_club-tijuana.png" },
+        { id: 8, local: "Puebla", escL: "231.png", visita: "San Luis", escV: "500px-Club_de_Fútbol_Atle.png" }
     ];
 
-    let selections = {};
-
-    function construirTabla() {
-        let html = '';
+    function renderPartidos() {
+        const container = document.getElementById('matches-container');
+        container.innerHTML = '';
         partidos.forEach(p => {
-            html += `
-                <tr class="match-row" id="row-${p.id}">
-                    <td class="team-left"><img src="${p.escL}" class="logo-img" alt=""> ${p.local}</td>
-                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'L', this)">L</button></td>
-                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'E', this)">E</button></td>
-                    <td class="btn-col"><button class="lev-btn" onclick="toggleOpt(${p.id}, 'V', this)">V</button></td>
-                    <td class="team-right">${p.visita} <img src="${p.escV}" class="logo-img" alt=""></td>
-                </tr>
+            container.innerHTML += `
+                <div class="match-row">
+                    <div class="team">
+                        <img src="${p.escL}" alt="${p.local}">
+                        <span>${p.local}</span>
+                    </div>
+                    <div class="options">
+                        <label><input type="radio" name="m${p.id}" value="L" onchange="calcularTotal()"><span>L</span></label>
+                        <label><input type="radio" name="m${p.id}" value="E" onchange="calcularTotal()"><span>E</span></label>
+                        <label><input type="radio" name="m${p.id}" value="V" onchange="calcularTotal()"><span>V</span></label>
+                    </div>
+                    <div class="team right">
+                        <span>${p.visita}</span>
+                        <img src="${p.escV}" alt="${p.visita}">
+                    </div>
+                </div>
             `;
         });
-        document.getElementById('tablaPartidos').innerHTML = html;
     }
 
-    function toggleOpt(matchId, choice, btn) {
-        if (!selections[matchId]) selections[matchId] = [];
-
-        let index = selections[matchId].indexOf(choice);
-        if (index > -1) {
-            selections[matchId].splice(index, 1);
-            if (choice === 'L') btn.classList.remove('selected-l');
-            if (choice === 'E') btn.classList.remove('selected-e');
-            if (choice === 'V') btn.classList.remove('selected-v');
-        } else {
-            let totalExtras = contarExtrasActuales();
-            if (totalExtras >= 3) {
-                alert('¡Límite alcanzado! Solo puedes agregar máximo 3 opciones adicionales.');
-                return;
-            }
-
-            selections[matchId].push(choice);
-            if (choice === 'L') btn.classList.add('selected-l');
-            if (choice === 'E') btn.classList.add('selected-e');
-            if (choice === 'V') btn.classList.add('selected-v');
-        }
-
-        actualizarCalculoAutomatico();
+    function calcularTotal() {
+        let total = 100; // Base de 8 partidos
+        document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
     }
 
-    function contarExtrasActuales() {
-        let totalSelecciones = 0;
-        let partidosCompletos = 0;
-        for (let i = 1; i <= 8; i++) {
-            if (selections[i] && selections[i].length > 0) {
-                partidosCompletos++;
-                totalSelecciones += selections[i].length;
-            }
-        }
-        let extras = totalSelecciones - 8;
-        return extras > 0 ? extras : 0;
+    function limpiarFormulario() {
+        document.getElementById('participant-name').value = '';
+        partidos.p(p => {
+            const radios = document.querySelectorAll(`input[name="m${p.id}"]`);
+            radios.forEach(r => r.checked = false);
+        });
+        calcularTotal();
     }
 
-    function actualizarCalculoAutomatico() {
-        let partidosLlenos = 0;
-        for (let i = 1; i <= 8; i++) {
-            if (selections[i] && selections[i].length > 0) partidosLlenos++;
-        }
-
-        let totalPagar = 0;
-        let extrasCount = contarExtrasActuales();
-
-        if (partidosLlenos === 8) {
-            totalPagar = 100; // Base de $100
-            if (extrasCount >= 1) totalPagar += 25;  // 1er adicional (+$25 = $125)
-            if (extrasCount >= 2) totalPagar += 25;  // 2do adicional (+$25 = $150)
-            if (extrasCount >= 3) totalPagar += 50;  // 3er adicional (+$50 = $200 máx)
-        } else if (partidosLlenos > 0) {
-            totalPagar = 100;
-        }
-
-        document.getElementById('displayTotal').innerText = `TOTAL: $${totalPagar}.00`;
-        document.getElementById('msgLimit').style.display = (extrasCount >= 3) ? 'block' : 'none';
-    }
-
-    function limpiarQuiniela() {
-        selections = {};
-        document.querySelectorAll('.lev-btn').forEach(b => b.className = 'lev-btn');
-        document.getElementById('nombrePart').value = '';
-        actualizarCalculoAutomatico();
-    }
-
-    function generarAleatorio() {
-        limpiarQuiniela();
-        const opciones = ['L', 'E', 'V'];
-        for(let i=1; i<=8; i++) {
-            let aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
-            let row = document.getElementById(`row-${i}`);
-            let btnIdx = aleatorio === 'L' ? 0 : (aleatorio === 'E' ? 1 : 2);
-            toggleOpt(i, aleatorio, row.querySelectorAll('.lev-btn')[btnIdx]);
-        }
+    function selecciónAleatoria() {
+        partidos.forEach(p => {
+            const opciones = ['L', 'E', 'V'];
+            const aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
+            const radioSeleccionado = document.querySelector(`input[name="m${p.id}"][value="${aleatorio}"]`);
+            if (radioSeleccionado) radioSeleccionado.checked = true;
+        });
+        calcularTotal();
     }
 
     function enviarWhatsApp() {
-        let nombre = document.getElementById('nombrePart').value.trim();
+        const nombre = document.getElementById('participant-name').value.trim();
         if(!nombre) {
-            alert('Por favor escribe tu nombre antes de enviar');
+            alert('Por favor ingresa tu nombre');
             return;
         }
-
-        let partidosLlenos = 0;
-        for(let i=1; i<=8; i++) {
-            if(selections[i] && selections[i].length > 0) partidosLlenos++;
-        }
-
-        if(partidosLlenos < 8) {
-            alert('Debes completar los 8 partidos principales');
-            return;
-        }
-
-        let mensaje = `*Quiniela de: ${nombre}*%0A`;
-        for(let i=1; i<=8; i++) {
-            let resTexto = selections[i].join('-');
-            mensaje += `- ${partidos[i-1].local} vs ${partidos[i-1].visita}: *${resTexto}*%0A`;
-        }
-
-        let extrasCount = contarExtrasActuales();
-        let totalPagar = 100;
-        if (extrasCount >= 1) totalPagar += 25;
-        if (extrasCount >= 2) totalPagar += 25;
-        if (extrasCount >= 3) totalPagar += 50;
-
-        mensaje += `%0A*Total a pagar: $${totalPagar}.00*`;
-
-        let telefono = "5219842794702";
-        let url = `https://wa.me/${telefono}?text=${mensaje}`;
+        let mensaje = `*MAGNO QUINIELAS MX*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
+        partidos.forEach(p => {
+            const seleccionado = document.querySelector(`input[name="m${p.id}"]:checked`);
+            const pronostico = seleccionado ? seleccionado.value : '-';
+            mensaje += `${p.id}. ${p.local} vs ${p.visita} ➡️ *[${pronostico}]*\n`;
+        });
+        mensaje += `\n*TOTAL: $100.00*`;
+        const url = `https://api.whatsapp.com/send?phone=&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
 
-    construirTabla();
+    window.onload = renderPartidos;
 </script>
 
 </body>
