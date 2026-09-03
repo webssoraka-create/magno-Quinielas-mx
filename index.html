@@ -21,33 +21,36 @@
             overflow: hidden;
             border: 2px solid #DAA520;
         }
-        .header {
-            background: linear-gradient(135deg, #8B0000, #006400);
+        /* Estilo de la segunda imagen: Banner grande con fondo de estadio y logo */
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
             color: white;
             text-align: center;
-            padding: 18px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 3px solid #FFD700;
+            padding: 25px 15px;
+            border-bottom: 3px solid #DAA520;
         }
-        .header img {
-            width: 55px;
-            height: 55px;
+        .hero-banner img {
+            width: 90px;
+            height: 90px;
             object-fit: contain;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            padding: 3px;
-            border: 2px solid #FFD700;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
-        .header h1 {
+        .hero-banner h1 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1.5px;
             color: #FFFFFF;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+        .hero-banner p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+            color: #FFD700;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
         .subheader {
             background-color: #000;
@@ -117,11 +120,12 @@
             background-color: #1a1a1a;
             color: #FFD700;
             text-align: center;
-            padding: 8px;
-            font-size: 0.9em;
+            padding: 10px;
+            font-size: 0.95em;
             font-weight: bold;
             border-top: 1px solid #333;
             border-bottom: 1px solid #333;
+            letter-spacing: 1px;
         }
         .form-section {
             padding: 15px;
@@ -178,14 +182,15 @@
 <body>
 
 <div class="container">
-    <!-- Encabezado con Logo y Título Grande -->
-    <div class="header">
-        <img src="logo-magno.png" alt="Logo Magno 5000 MX" onerror="this.style.display='none'">
-        <h1>MAGNO QUINUELAS MX</h1>
+    <!-- Banner Principal Estilo Referencia (Logo + Nombre + Subtítulo) -->
+    <div class="hero-banner">
+        <img src="magno quinielas mx.png" alt="Logo Magno Quinielas MX" onerror="this.style.display='none'">
+        <h1>MAGNO QUINIELAS MX</h1>
+        <p>Tus pronósticos valen oro</p>
     </div>
     <div class="subheader">MEDIA SEMANA</div>
 
-    <!-- Lista de Partidos con los 16 Escudos -->
+    <!-- Lista de Partidos -->
     <div id="matches-container"></div>
 
     <!-- Barra de Información y Cierre -->
@@ -195,7 +200,7 @@
     
     <!-- Contador Regresivo en Vivo -->
     <div class="countdown-box" id="countdown-display">
-        Cierre en: Calculando tiempo...
+        ⏱️ Cierra en: Calculando...
     </div>
 
     <!-- Sección de Registro y Envío -->
@@ -235,9 +240,9 @@
                         <span>${p.local}</span>
                     </div>
                     <div class="options">
-                        <label><input type="checkbox" name="m${p.id}" value="L" onchange="calcularTotal()"><span>L</span></label>
-                        <label><input type="checkbox" name="m${p.id}" value="E" onchange="calcularTotal()"><span>E</span></label>
-                        <label><input type="checkbox" name="m${p.id}" value="V" onchange="calcularTotal()"><span>V</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="L" onchange="verificarLimiteYCalcular(this)"><span>L</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="E" onchange="verificarLimiteYCalcular(this)"><span>E</span></label>
+                        <label><input type="checkbox" name="m${p.id}" value="V" onchange="verificarLimiteYCalcular(this)"><span>V</span></label>
                     </div>
                     <div class="team right">
                         <span>${p.visita}</span>
@@ -246,6 +251,22 @@
                 </div>
             `;
         });
+    }
+
+    // Bloquea automáticamente si intentan marcar más de 11 opciones en total (8 base + 3 dobles/triples máximas permitidas)
+    function verificarLimiteYCalcular(element) {
+        let seleccionadosTotales = 0;
+        partidos.forEach(p => {
+            const checks = document.querySelectorAll(`input[name="m${p.id}"]:checked`);
+            seleccionadosTotales += checks.length;
+        });
+
+        // Si se pasa de 11 aciertos totales (equivalente a cobrar hasta $200 máximo), se desmarca el último intento
+        if (seleccionadosTotales > 11) {
+            alert("⚠️ Límite máximo de dobles/triples alcanzado.");
+            element.checked = false;
+        }
+        calcularTotal();
     }
 
     function calcularTotal() {
@@ -261,7 +282,8 @@
             let extras = seleccionadosTotales - 8;
             if (extras === 1) total = 125;
             else if (extras === 2) total = 150;
-            else if (extras >= 3) total = 200;
+            else if (extras === 3) total = 175;
+            else if (extras >= 4) total = 200;
         }
 
         document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
@@ -287,14 +309,13 @@
         calcularTotal();
     }
 
-    // Cronómetro Regresivo al 11 de Septiembre
     function actualizarCronometro() {
         const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
         const ahora = new Date().getTime();
         const diferencia = fechaCierre - ahora;
 
         if (diferencia < 0) {
-            document.getElementById('countdown-display').innerText = "¡QUINIERA CERRADA!";
+            document.getElementById('countdown-display').innerText = "¡QUINIELA CERRADA!";
             return;
         }
 
@@ -331,7 +352,8 @@
             let extras = seleccionadosTotales - 8;
             if (extras === 1) total = 125;
             else if (extras === 2) total = 150;
-            else if (extras >= 3) total = 200;
+            else if (extras === 3) total = 175;
+            else if (extras >= 4) total = 200;
         }
 
         mensaje += `\n*TOTAL: $${total}.00*`;
