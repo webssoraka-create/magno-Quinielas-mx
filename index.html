@@ -230,7 +230,7 @@
             height: 20px;
         }
 
-        /* Estilos de la Ventana Emergente (Modal) */
+        /* Estilos de la Ventana Emergente (Modal) con los 2 botones azules */
         .modal {
             display: none;
             position: fixed;
@@ -297,7 +297,7 @@
             display: flex;
             gap: 10px;
         }
-        /* Dos botones azules como pediste */
+        /* Dos botones azules para la confirmación y reglas */
         .btn-modal-blue-1 {
             background-color: #004d33;
             color: white;
@@ -371,7 +371,6 @@
             <button class="btn-random" onclick="selecciónAleatoria()">Aleatorio</button>
         </div>
         
-        <!-- Botón modificado para abrir primero la ventanilla de términos -->
         <button class="btn-whatsapp" onclick="abrirModalTerminos()">Enviar Quiniela por WhatsApp 📱</button>
         
         <!-- Botón de Ayuda / Más Información directo a tu WhatsApp -->
@@ -418,7 +417,7 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
         </label>
 
         <div class="modal-buttons">
-            <!-- Dos botones azules como pediste -->
+            <!-- Dos botones azules -->
             <button class="btn-modal-blue-1" onclick="cerrarModalTerminos()">Regresar / Cancelar</button>
             <button class="btn-modal-blue-2" onclick="enviarWhatsAppReal()">Sí, He Leído y Acepto</button>
         </div>
@@ -517,7 +516,8 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
     }
 
     function actualizarCronometro() {
-        const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
+        // Cierre estricto programado para el 10 de septiembre a las 10:00 p.m.
+        const fechaCierre = new Date('September 10, 2026 22:00:00').getTime();
         const ahora = new Date().getTime();
         const diferencia = fechaCierre - ahora;
 
@@ -526,15 +526,17 @@ Tu participación y quiniela oficial quedan registradas únicamente al recibir e
             document.getElementById('hours').innerText = "00";
             document.getElementById('minutes').innerText = "00";
             document.getElementById('seconds').innerText = "00";
+            
+            // Opcional: Deshabilitar envíos si ya pasó el cierre
+            const btnWp = document.querySelector('.btn-whatsapp');
+            if(btnWp) {
+                btnWp.innerText = "QUINIELA CERRADA 🔒";
+                btnWp.style.backgroundColor = "#555";
+                btnWp.onclick = function() { alert("Lo sentimos, el tiempo para enviar quinielas ha finalizado."); };
+            }
             return;
         }
 
         const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = String(dias).padStart(2, '0');
-        document.getElementById('hours').innerText = String(horas).padStart(2, '0');
-        document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
-        document.getElementById('seconds').in
+        const m
