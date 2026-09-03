@@ -5,86 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magno Quinielas MX</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 10px; color: #333; }
-        .container { max-width: 500px; background: white; margin: auto; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2 { background: #0b6623; color: white; text-align: center; padding: 12px; border-radius: 8px; margin-top: 0; font-size: 20px; }
-        .match { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; align-items: center; }
-        .teams-row { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
-        .team { width: 40%; text-align: center; font-weight: bold; font-size: 14px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .team img { width: 40px; height: 40px; object-fit: contain; }
-        .vs { font-size: 12px; color: #777; font-weight: bold; }
-        .options { display: flex; gap: 8px; justify-content: center; width: 100%; }
-        .options button { padding: 6px 12px; border: 1px solid #ccc; background: #fff; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; flex: 1; max-width: 70px; }
-        .options button.selected { background: #0b6623; color: white; border-color: #0b6623; }
-        .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; margin-top: 20px; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #eef2f5; margin: 0; padding: 5px; color: #333; }
+        .container { max-width: 480px; background: white; margin: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); overflow: hidden; }
+        
+        /* Cabecera */
+        .header { background: linear-gradient(135deg, #cc0000, #0b6623); padding: 12px; text-align: center; color: white; border-bottom: 3px solid #000; }
+        .header h2 { margin: 0; font-size: 22px; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); letter-spacing: 1px; }
+        .sub-header { background: #111; color: #ffcc00; text-align: center; padding: 6px; font-size: 14px; font-weight: bold; letter-spacing: 1px; }
+        
+        /* Tabla de partidos */
+        .match-table { width: 100%; border-collapse: collapse; }
+        .match-row { border-bottom: 1px solid #ddd; }
+        .match-row td { padding: 7px 3px; text-align: center; font-size: 12px; vertical-align: middle; }
+        .match-row:nth-child(even) { background-color: #fafafa; }
+        
+        .btn-col { width: 32px; }
+        .team-col { width: 38%; font-weight: bold; font-size: 11px; display: flex; align-items: center; justify-content: center; gap: 3px; }
+        .team-col img { width: 20px; height: 20px; object-fit: contain; }
+        
+        /* Botones L E V */
+        .lev-btn { width: 28px; height: 28px; border: 1px solid #bbb; background: #fff; font-weight: bold; font-size: 11px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .lev-btn.selected-l { background: #cc0000 !important; color: white !important; border-color: #990000; }
+        .lev-btn.selected-e { background: #555 !important; color: white !important; border-color: #333; }
+        .lev-btn.selected-v { background: #0b6623 !important; color: white !important; border-color: #053312; }
+        
+        /* Barra de info y precios */
+        .info-bar { background: linear-gradient(to right, #ffcc00, #0b6623); color: #000; padding: 8px; text-align: center; font-weight: bold; font-size: 13px; display: flex; justify-content: space-around; }
+        
+        /* Sección de controles y total */
+        .form-section { padding: 12px; background: #f4f6f9; border-top: 1px solid #ddd; }
+        .input-name { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; margin-bottom: 10px; text-align: center; font-weight: bold; }
+        
+        .total-display { text-align: center; font-size: 18px; font-weight: bold; color: #0b6623; margin-bottom: 10px; background: #fff; padding: 6px; border-radius: 4px; border: 1px dashed #0b6623; }
+        
+        .action-buttons { display: flex; gap: 6px; margin-bottom: 10px; }
+        .btn-action { flex: 1; padding: 8px; font-weight: bold; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; color: white; }
+        .btn-limpiar { background: #e74c3c; }
+        .btn-aleatorio { background: #34495e; }
+        
+        .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 15px; border: none; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>⚽ Magno Quinielas MX ⚽</h2>
+    <div class="header">
+        <h2>MAGNO QUINIELAS MX</h2>
+    </div>
+    <div class="sub-header">MEDIA SEMANA</div>
 
-    <!-- Partido 1 -->
-    <div class="match">
-        <div class="teams-row">
-            <div class="team">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Logo_Am%C3%A9rica.svg" alt="América">
-                América
-            </div>
-            <div class="vs">VS</div>
-            <div class="team">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Logo_Cruz_Azul.svg" alt="Cruz Azul">
-                Cruz Azul
-            </div>
-        </div>
-        <div class="options">
-            <button onclick="selectOption(this, 1, 'L')">L</button>
-            <button onclick="selectOption(this, 1, 'E')">E</button>
-            <button onclick="selectOption(this, 1, 'V')">V</button>
-        </div>
+    <table class="match-table" id="tablaPartidos">
+        </table>
+
+    <div class="info-bar">
+        <span id="txtPrecio">PRECIO: $25.00</span>
+        <span id="txtCierre">CIERRE: MARTES 11:00 P. M.</span>
     </div>
 
-    <!-- Partido 2 -->
-    <div class="match">
-        <div class="teams-row">
-            <div class="team">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Logo_Guadalajara_-_Chivas.svg" alt="Chivas">
-                Chivas
-            </div>
-            <div class="vs">VS</div>
-            <div class="team">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_Pumas_UNAM.svg" alt="Pumas">
-                Pumas
-            </div>
-        </div>
-        <div class="options">
-            <button onclick="selectOption(this, 2, 'L')">L</button>
-            <button onclick="selectOption(this, 2, 'E')">E</button>
-            <button onclick="selectOption(this, 2, 'V')">V</button>
-        </div>
-    </div>
+    <div class="form-section">
+        <input type="text" id="nombrePart" class="input-name" placeholder="NOMBRE DEL PARTICIPANTE">
+        
+        <div class="total-display" id="displayTotal">TOTAL: $0.00</div>
 
-    <a href="#" class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp</a>
+        <div class="action-buttons">
+            <button class="btn-action btn-limpiar" onclick="limpiarQuiniela()">Limpiar</button>
+            <button class="btn-action btn-aleatorio" onclick="generarAleatorio()">Aleatorio</button>
+        </div>
+
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar por WhatsApp 📱</button>
+    </div>
 </div>
 
 <script>
+    // Lista de partidos con sus equipos y escudos
+    const partidos = [
+        { id: 1, local: "América", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_america_mexico_534_1_20200613144122.png", visita: "Cruz Azul", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_cruz_azul_539_1_20200613144125.png" },
+        { id: 2, local: "Chivas", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_guadalajara_chivas_553_1_20200613144131.png", visita: "Pumas", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_pumas_unam_588_1_20200613144146.png" },
+        { id: 3, local: "Monterrey", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_monterrey_592_1_20200613144154.png", visita: "Tigres", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_tigres_uanl_639_1_20200613144212.png" },
+        { id: 4, local: "Toluca", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_toluca_648_1_20200613144215.png", visita: "León", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_leon_574_1_20200613144139.png" },
+        { id: 5, local: "Santos", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_santos_laguna_629_1_20200613144208.png", visita: "Pachuca", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_pachuca_585_1_20200613144144.png" },
+        { id: 6, local: "Atlas", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_atlas_536_1_20200613144123.png", visita: "Necaxa", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_necaxa_599_1_20200613144156.png" },
+        { id: 7, local: "Juárez", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_fc_juarez_550_1_20200613144129.png", visita: "Tijuana", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_tijuana_645_1_20200613144214.png" },
+        { id: 8, local: "Puebla", escLocal: "https://images.tcdn.com.br/img/img_prod/757297/escudo_puebla_587_1_20200613144145.png", visita: "San Luis", escVisita: "https://images.tcdn.com.br/img/img_prod/757297/escudo_san_luis_623_1_20200613144205.png" }
+    ];
+
+    const PRECIO_CADA_UNO = 25.00;
     let selections = {};
-    function selectOption(btn, matchId, choice) {
-        let parent = btn.parentElement;
-        parent.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
+
+    function construirTabla() {
+        let html = '';
+        partidos.forEach(p => {
+            html += `
+                <tr class="match-row" id="row-${p.id}">
+                    <td class="btn-col"><button class="lev-btn" onclick="selectOpt(${p.id}, 'L')">L</button></td>
+                    <td class="team-col"><img src="${p.escLocal}" alt="${p.local}">${p.local}</td>
+                    <td style="font-size: 10px; color: #888; width: 6%;">VS</td>
+                    <td class="team-col"><img src="${p.escVisita}" alt="${p.visita}">${p.visita}</td>
+                    <td class="btn-col"><button class="lev-btn" onclick="selectOpt(${p.id}, 'V')">V</button></td>
+                </tr>
+            `;
+        });
+        document.getElementById('tablaPartidos').innerHTML = html;
+    }
+
+    function selectOpt(matchId, choice) {
         selections[matchId] = choice;
+        let row = document.getElementById(`row-${matchId}`);
+        let buttons = row.querySelectorAll('.lev-btn');
+        
+        buttons.forEach(b => {
+            b.className = 'lev-btn'; // Quitar selecciones previas
+        });
+
+        // Marcar el botón correcto con su color respectivo
+        if(choice === 'L') row.children[0].children[0].classList.add('selected-l');
+        if(choice === 'V') row.children[4].children[0].classList.add('selected-v');
+
+        actualizarTotal();
+    }
+
+    function actualizarTotal() {
+        let respondidos = Object.keys(selections).length;
+        let total = respondidos * PRECIO_CADA_UNO;
+        document.getElementById('displayTotal').innerText = `TOTAL: $${total}.00 (${respondidos}/${partidos.length} partidos)`;
+    }
+
+    function limpiarQuiniela() {
+        selections = {};
+        document.querySelectorAll('.lev-btn').forEach(b => b.className = 'lev-btn');
+        document.getElementById('nombrePart').value = '';
+        actualizarTotal();
+    }
+
+    function generarAleatorio() {
+        limpiarQuiniela();
+        const opciones = ['L', 'V'];
+        partidos.forEach(p => {
+            let aleatorio = opciones[Math.floor(Math.random() * opciones.length)];
+            selectOpt(p.id, aleatorio);
+        });
     }
 
     function enviarWhatsApp() {
-        let mensaje = "¡Hola! Esta es mi quiniela de MagnoQuinielasMx:%0A";
-        for (let match in selections) {
-            mensaje += `- Partido ${match}: ${selections[match]}%0A`;
+        let nombre = document.getElementById('nombrePart').value.trim();
+        if(!nombre) {
+            alert('Por favor escribe tu nombre antes de enviar');
+            return;
         }
-        let telefono = "5219842794702";
+        if(Object.keys(selections).length === 0) {
+            alert('Selecciona al menos un pronóstico');
+            return;
+        }
+
+        let mensaje = `⚽ *MAGNO QUINIELAS MX* ⚽%0A`;
+        mensaje += `👤 *Participante:* ${nombre}%0A%0A`;
+        
+        partidos.forEach(p => {
+            let res = selections[p.id] || 'Falta';
+            mensaje += `${p.local} vs ${p.visita} ➡️ *[ ${res} ]*%0A`;
+        });
+
+        let totalPagar = Object.keys(selections).length * PRECIO_CADA_UNO;
+        mensaje += `%0A💰 *Total a pagar:* $${totalPagar}.00`;
+
+        let telefono = "5219842794702"; // Tu número configurado
         let url = `https://wa.me/${telefono}?text=${mensaje}`;
         window.open(url, '_blank');
     }
+
+    // Inicializar al cargar
+    construirTabla();
 </script>
 
 </body>
