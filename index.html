@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magno Quinielas MX</title>
+    <title>MAGNO QUINIELAS MX</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #121212;
             margin: 0;
             padding: 10px;
             color: #333;
@@ -16,31 +16,53 @@
             max-width: 500px;
             margin: 0 auto;
             background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             overflow: hidden;
+            border: 2px solid #DAA520;
         }
         .header {
-            background: linear-gradient(to right, #8B0000, #006400);
+            background: linear-gradient(135deg, #8B0000, #006400);
             color: white;
             text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            font-size: 1.2em;
+            padding: 18px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 3px solid #FFD700;
+        }
+        .header img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            padding: 3px;
+            border: 2px solid #FFD700;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #FFFFFF;
         }
         .subheader {
-            background-color: #111;
+            background-color: #000;
             color: #FFD700;
             text-align: center;
-            padding: 5px;
-            font-size: 0.9em;
+            padding: 8px;
+            font-size: 1em;
             font-weight: bold;
+            letter-spacing: 2px;
         }
         .match-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 10px;
+            padding: 10px 12px;
             border-bottom: 1px solid #eee;
             font-size: 0.9em;
         }
@@ -49,27 +71,29 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
         .team.right {
             justify-content: flex-end;
             text-align: right;
         }
         .team img {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
         }
         .options {
             display: flex;
-            gap: 4px;
+            gap: 5px;
         }
         .options label {
             border: 1px solid #ccc;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 5px 9px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8em;
-            background: #fff;
+            font-size: 0.85em;
+            background: #f9f9f9;
+            font-weight: bold;
         }
         .options input {
             display: none;
@@ -78,78 +102,103 @@
             background-color: #006400;
             color: white;
             font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 3px;
+            padding: 3px 7px;
+            border-radius: 4px;
         }
         .info-bar {
             background: linear-gradient(to right, #DAA520, #228B22);
             color: white;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             font-weight: bold;
-            font-size: 0.8em;
-            display: flex;
-            justify-content: space-between;
+            font-size: 0.85em;
+        }
+        .countdown-box {
+            background-color: #1a1a1a;
+            color: #FFD700;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
         }
         .form-section {
             padding: 15px;
+            background-color: #fafafa;
         }
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
             text-align: center;
-            font-size: 1em;
+            font-size: 1.05em;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: bold;
         }
         .total-box {
-            border: 1px solid #28a745;
-            color: #28a745;
+            border: 2px solid #28a745;
+            background-color: #e8f5e9;
+            color: #2e7d32;
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
         .btn-container {
             display: flex;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         button {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             color: white;
             font-weight: bold;
             cursor: pointer;
+            font-size: 0.95em;
         }
         .btn-clear { background-color: #d9534f; }
         .btn-random { background-color: #34495e; }
         .btn-whatsapp {
             background-color: #28a745;
             width: 100%;
-            padding: 12px;
-            font-size: 1.1em;
+            padding: 14px;
+            font-size: 1.15em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">MAGNO QUINIELAS MX</div>
+    <!-- Encabezado con Logo y Título Grande -->
+    <div class="header">
+        <img src="logo-magno.png" alt="Logo Magno 5000 MX" onerror="this.style.display='none'">
+        <h1>MAGNO QUINUELAS MX</h1>
+    </div>
     <div class="subheader">MEDIA SEMANA</div>
 
+    <!-- Lista de Partidos con los 16 Escudos -->
     <div id="matches-container"></div>
 
+    <!-- Barra de Información y Cierre -->
     <div class="info-bar">
-        <span>BASE: $100.00 (8 PARTIDOS)</span>
-        <span>CIERRE: 11 DE SEPT. 3:30 P. M.</span>
+        BASE: $100.00 (8 PARTIDOS) | CIERRE: 11 DE SEPT. 3:30 P. M.
+    </div>
+    
+    <!-- Contador Regresivo en Vivo -->
+    <div class="countdown-box" id="countdown-display">
+        Cierre en: Calculando tiempo...
     </div>
 
+    <!-- Sección de Registro y Envío -->
     <div class="form-section">
         <input type="text" id="participant-name" placeholder="NOMBRE DEL PARTICIPANTE">
         <div class="total-box" id="total-display">TOTAL: $100.00</div>
@@ -166,7 +215,7 @@
 <script>
     const partidos = [
         { id: 1, local: "América", escL: "Club-America-Logo.png", visita: "Cruz Azul", escV: "Cruz-Azul-Logo.png" },
-        { id: 2, local: "Chivas", escL: "219 (3).png", visita: "Pumas", escV: "pumas-unam-logo-png_1280.png" },
+        { id: 2, local: "Chivas", escL: "219 (3).png", visita: "Pumas", escV: "pumas-unam-logo-png_seeklogo-177354.png" },
         { id: 3, local: "Monterrey", escL: "500px-Club_de_Fútbol_Monterrey_logo.svg.png", visita: "Tigres", escV: "Tigres_UANL_2.jpg" },
         { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "León", escV: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg" },
         { id: 5, local: "Santos", escL: "santos-laguna-logo-footylogos-1200.webp", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
@@ -238,6 +287,28 @@
         calcularTotal();
     }
 
+    // Cronómetro Regresivo al 11 de Septiembre
+    function actualizarCronometro() {
+        const fechaCierre = new Date('September 11, 2026 15:30:00').getTime();
+        const ahora = new Date().getTime();
+        const diferencia = fechaCierre - ahora;
+
+        if (diferencia < 0) {
+            document.getElementById('countdown-display').innerText = "¡QUINIERA CERRADA!";
+            return;
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown-display').innerText = 
+            `⏱️ Cierra en: ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    setInterval(actualizarCronometro, 1000);
+
     function enviarWhatsApp() {
         const nombre = document.getElementById('participant-name').value.trim();
         if(!nombre) {
@@ -268,7 +339,10 @@
         window.open(url, '_blank');
     }
 
-    window.onload = renderPartidos;
+    window.onload = function() {
+        renderPartidos();
+        actualizarCronometro();
+    };
 </script>
 
 </body>
