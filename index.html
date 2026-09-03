@@ -288,7 +288,7 @@
             line-height: 1.6;
             color: #444;
             text-align: justify;
-            white-space: pre-line; /* Respeta los párrafos y saltos de línea */
+            white-space: pre-line;
         }
         .modal-close {
             background-color: #CE1126;
@@ -368,26 +368,67 @@
 <div id="modal-reglas" class="modal">
     <div class="modal-content">
         <h3>📖 Reglas y Acumulados</h3>
-        <p>QUINIELAS MAGNO MX - REGLAS Y DESCRIPCIÓN
+        <p>QUINIELAS MAGNO MX 
 
-Si hay 1 ganador, se lleva el 1.er lugar y el resultado correspondiente de la jornada. 
-Si hay 2 empatados, se divide el resultado correspondiente entre ambos. 
-Con 3 o 4 empatados, el premio pasa al acumulado. 
-Si son 5 empatados, se realiza una ruleta para determinar el resultado. 
-Con 6 empatados, el resultado se queda acumulado y aplica la segunda regla. Y así sucesivamente, dependiendo de cuántas personas queden empatadas.
+REGLAS Y DESCRIPCIÓN
 
-IMPORTANTE: En caso de que el resultado pase al acumulado, solo podrán participar en el siguiente acumulado las personas que hayan entrado al acumulado anterior.
+1 ganador: se lleva el 1.er lugar y el resultado correspondiente de la jornada.
 
-REGLA — SEGUNDA ACUMULACIÓN
-Cuando el resultado llegue a su segunda acumulación, se aplicará esta modalidad: 1 participante obtiene el resultado completo de la jornada; 2 participantes dividen el resultado en partes iguales; 3 o más participantes hacen que el resultado pase al acumulado para la siguiente jornada. Esta regla se seguirá aplicando de acuerdo con la cantidad de participantes que queden empatados.
+2 empatados: se divide el resultado correspondiente entre ambos.
 
-REGLA ESPECIAL — TERCER ACUMULADO
-En caso de que el acumulado llegue a su tercera acumulación, se aplicará una modalidad especial: el 1.er lugar, 2.º lugar y 3.er lugar obtienen una parte del resultado correspondiente. A partir del 4.º lugar, los participantes que no alcancen las posiciones establecidas quedan fuera del resultado de esa jornada.
+3 empatados: pasa al acumulado.
 
-REGLA ESPECIAL DE EMPATES — 4ª ACUMULACIÓN
-En caso de que varios participantes queden empatados con el mismo número en la 3ª y vuelva a suceder lo mismo en la 4ª: con 5 empatados, los 5 participantes que obtuvieron el resultado ganador quedan seleccionados y las demás entradas quedan fuera, continuando el acumulado. Con 6 o 7 empatados ocurre de la misma forma y así sucesivamente, aumentando conforme aumente el número de personas empatadas.
+4 empatados: pasa al acumulado.
 
-IMPORTANTE SOBRE PARTICIPACIONES: Cada persona cuenta como un solo participante, aunque haya realizado hasta 3 quinielas; sin embargo, se escogerá la mejor quiniela de cada uno. En caso de que nadie obtenga resultado ganador se vuelve a acumular, solo entran los del acumulado y se aplicará lo de la 3ª regla hasta que alguien gane, o la 4ª de ser necesario, siguiéndose así hasta que alguien se lleve una parte del dinero.</p>
+5 empatados: se realiza una ruleta para determinar el resultado.
+
+6 empatados: el resultado se queda acumulado ya aplica la segunda regla que estára en lo importante 
+
+Y así sucesivamente, dependiendo de cuántas personas queden empatadas.
+
+IMPORTANTE: En caso de que el resultado pase al acumulado, solo podrán participar en el siguiente acumulado las personas que hayan entrado al acumlado y en breve se le mandara la 2 regla
+
+ 
+REGLA — SEGUNDA ACUMULACIÓN 
+
+Cuando el resultado llegue a su segunda acumulación, se aplicará esta modalidad:
+
+1 participante: obtiene el resultado completo de la jornada.
+
+2 participantes: el resultado se divide in partes iguales entre ambos.
+
+3 o más participantes: el resultado pasa al acumulado para la siguiente jornada.
+
+Esta regla se seguirá aplicando de acuerdo con la cantidad de participantes que queden empatados.
+
+El acumulado que se acumulo en la primera y en 2 en caso de que no hagan agando los 3 y ganaron más se va aplicar al 3 regla que viene acontinuación 
+
+REGLA ESPECIAL — TERCER ACUMULADO 
+
+En caso de que el acumulado llegue a su tercera acumulación, se aplicará una modalidad especial para esa jornada:
+
+1.er lugar: obtiene una parte del resultado correspondiente.
+2.º lugar: obtiene una parte del resultado correspondiente.
+3.er lugar: obtiene una parte del resultado correspondiente.
+
+A partir del 4.º lugar, los participantes que no alcancen las posiciones establecidas quedan fuera del resultado de esa jornada.
+
+En caso de que 4 o más ganen se aplicará la siguiente regla que sera la 4 que se va mandar 
+
+REGLA ESPECIAL DE EMPATES   4 acumulacion 
+
+En caso de que varios participantes queden empatados con el mismo número en la 3 y volviera a suceder lo mismo en la 4 
+
+5 empatados: los 5 participantes que obtuvieron el resultado ganador quedan seleccionados y las demás entradas quedan fuera. El acumulado continúa para la siguiente jornada.
+
+6 empatados: los 6 participantes quedan seleccionados y las demás entradas quedan fuera. El acumulado continúa para la siguiente jornada.
+
+7 empatados: los 7 participantes quedan seleccionados y las demás entradas quedan fuera. El acumulado continúa para la siguiente jornada.
+
+Y así sucesivamente: el número de participantes seleccionados aumentará conforme aumente el número de personas empatadas.
+
+IMPORTANTE: Cada persona cuenta como un solo participante, хотя haya realizado hasta 3 quinielas. Pero se va escojer la mejor quiniela 
+Y ya en caso que nadien aiga resultado ganado se vuelve acumular y solo entran los del acumulado y se aplicará lo de la 3 regla asta que alguien gane ya en caso de que no la 4 y ya así se sigue asta que alguiens e lleve una parte de el dinero</p>
         <button class="modal-close" onclick="cerrarModal('modal-reglas')">Cerrar</button>
     </div>
 </div>
@@ -506,16 +547,4 @@ IMPORTANTE SOBRE PARTICIPACIONES: Cada persona cuenta como un solo participante,
 
         if (diferencia < 0) {
             document.getElementById('days').innerText = "00";
-            document.getElementById('hours').innerText = "00";
-            document.getElementById('minutes').innerText = "00";
-            document.getElementById('seconds').innerText = "00";
-            return;
-        }
-
-        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = String(dias).padStart(2, '0');
-        document.get
+            documen
