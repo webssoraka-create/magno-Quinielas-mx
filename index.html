@@ -21,33 +21,32 @@
             overflow: hidden;
             border: 2px solid #DAA520;
         }
-        /* Estilo de la segunda imagen: Banner grande con fondo de estadio y logo */
         .hero-banner {
             position: relative;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
             color: white;
             text-align: center;
-            padding: 25px 15px;
+            padding: 22px 15px;
             border-bottom: 3px solid #DAA520;
         }
         .hero-banner img {
-            width: 90px;
-            height: 90px;
+            width: 85px;
+            height: 85px;
             object-fit: contain;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
         }
         .hero-banner h1 {
             margin: 0;
-            font-size: 1.8em;
+            font-size: 1.7em;
             font-weight: 900;
             letter-spacing: 1.5px;
             color: #FFFFFF;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
         }
         .hero-banner p {
-            margin: 5px 0 0 0;
-            font-size: 0.9em;
+            margin: 4px 0 0 0;
+            font-size: 0.85em;
             color: #FFD700;
             font-weight: bold;
             letter-spacing: 1px;
@@ -60,6 +59,48 @@
             font-size: 1em;
             font-weight: bold;
             letter-spacing: 2px;
+        }
+        .countdown-container {
+            background-color: #0a0a0a;
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+        }
+        .countdown-title {
+            color: #FFD700;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .countdown-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+        .time-box {
+            background: linear-gradient(135deg, #222, #111);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 6px 8px;
+            min-width: 45px;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .time-number {
+            display: block;
+            color: #FFFFFF;
+            font-size: 1.2em;
+            font-weight: 900;
+            font-family: monospace;
+        }
+        .time-label {
+            display: block;
+            color: #AAAAAA;
+            font-size: 0.6em;
+            margin-top: 2px;
+            text-transform: uppercase;
         }
         .match-row {
             display: flex;
@@ -114,18 +155,7 @@
             padding: 10px;
             text-align: center;
             font-weight: bold;
-            font-size: 0.85em;
-        }
-        .countdown-box {
-            background-color: #1a1a1a;
-            color: #FFD700;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.95em;
-            font-weight: bold;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-            letter-spacing: 1px;
+            font-size: 0.82em;
         }
         .form-section {
             padding: 15px;
@@ -182,7 +212,7 @@
 <body>
 
 <div class="container">
-    <!-- Banner Principal Estilo Referencia (Logo + Nombre + Subtítulo) -->
+    <!-- Banner Principal con tu Logo (Asegúrate de cambiar 'magno quinielas mx.png' si tu archivo se llama diferente) -->
     <div class="hero-banner">
         <img src="magno quinielas mx.png" alt="Logo Magno Quinielas MX" onerror="this.style.display='none'">
         <h1>MAGNO QUINIELAS MX</h1>
@@ -190,17 +220,35 @@
     </div>
     <div class="subheader">MEDIA SEMANA</div>
 
+    <!-- Contador Regresivo en Grande -->
+    <div class="countdown-container">
+        <div class="countdown-title">Cierre de Quiniela</div>
+        <div class="countdown-boxes">
+            <div class="time-box">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">Días</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">Horas</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">Min</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">Seg</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Lista de Partidos -->
     <div id="matches-container"></div>
 
-    <!-- Barra de Información y Cierre -->
+    <!-- Barra de Información -->
     <div class="info-bar">
         BASE: $100.00 (8 PARTIDOS) | CIERRE: 11 DE SEPT. 3:30 P. M.
-    </div>
-    
-    <!-- Contador Regresivo en Vivo -->
-    <div class="countdown-box" id="countdown-display">
-        ⏱️ Cierra en: Calculando...
     </div>
 
     <!-- Sección de Registro y Envío -->
@@ -253,7 +301,7 @@
         });
     }
 
-    // Bloquea automáticamente si intentan marcar más de 11 opciones en total (8 base + 3 dobles/triples máximas permitidas)
+    // Control de límite estricto: Bloquea automáticamente si intentas superar el tope de selección permitido
     function verificarLimiteYCalcular(element) {
         let seleccionadosTotales = 0;
         partidos.forEach(p => {
@@ -261,9 +309,9 @@
             seleccionadosTotales += checks.length;
         });
 
-        // Si se pasa de 11 aciertos totales (equivalente a cobrar hasta $200 máximo), se desmarca el último intento
+        // 11 selecciones máximas permitidas (8 base + 3 adicionales de máxima escala)
         if (seleccionadosTotales > 11) {
-            alert("⚠️ Límite máximo de dobles/triples alcanzado.");
+            alert("⚠️ Límite máximo de selecciones alcanzado.");
             element.checked = false;
         }
         calcularTotal();
@@ -315,7 +363,10 @@
         const diferencia = fechaCierre - ahora;
 
         if (diferencia < 0) {
-            document.getElementById('countdown-display').innerText = "¡QUINIELA CERRADA!";
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
             return;
         }
 
@@ -324,8 +375,10 @@
         const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
         const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown-display').innerText = 
-            `⏱️ Cierra en: ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        document.getElementById('days').innerText = String(dias).padStart(2, '0');
+        document.getElementById('hours').innerText = String(horas).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
     }
 
     setInterval(actualizarCronometro, 1000);
