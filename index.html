@@ -22,7 +22,7 @@
         /* Orden: Logo + Nombre izquierdo / Nombre derecho + Logo */
         .team-left { width: 34%; font-weight: bold; text-align: left; padding-left: 4px; font-size: 11px; color: #111; }
         .team-right { width: 34%; font-weight: bold; text-align: right; padding-right: 4px; font-size: 11px; color: #111; }
-        .logo-img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin: 0 3px; }
+        .logo-img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin: 0 3px; background: transparent; }
         
         /* Botones L, E, V */
         .btn-col { width: 8%; }
@@ -83,14 +83,14 @@
 
 <script>
     const partidos = [
-        { id: 1, local: "América", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8669.png", visita: "Cruz Azul", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/9716.png" },
-        { id: 2, local: "Chivas", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8672.png", visita: "Pumas", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/8675.png" },
-        { id: 3, local: "Monterrey", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8681.png", visita: "Tigres", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/8682.png" },
-        { id: 4, local: "Toluca", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8683.png", visita: "León", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/10237.png" },
-        { id: 5, local: "Santos", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8678.png", visita: "Pachuca", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/8676.png" },
-        { id: 6, local: "Atlas", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8670.png", visita: "Necaxa", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/8673.png" },
-        { id: 7, local: "Juárez", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/103603.png", visita: "Tijuana", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/8674.png" },
-        { id: 8, local: "Puebla", escL: "https://images.fotmob.com/image_resources/logo/teamlogo/8677.png", visita: "San Luis", escV: "https://images.fotmob.com/image_resources/logo/teamlogo/9839.png" }
+        { id: 1, local: "América", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/228.png", visita: "Cruz Azul", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/232.png" },
+        { id: 2, local: "Chivas", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/233.png", visita: "Pumas", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/241.png" },
+        { id: 3, local: "Monterrey", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/238.png", visita: "Tigres", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/245.png" },
+        { id: 4, local: "Toluca", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/247.png", visita: "León", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/236.png" },
+        { id: 5, local: "Santos", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/244.png", visita: "Pachuca", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/239.png" },
+        { id: 6, local: "Atlas", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/229.png", visita: "Necaxa", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/237.png" },
+        { id: 7, local: "Juárez", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/10787.png", visita: "Tijuana", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/246.png" },
+        { id: 8, local: "Puebla", escL: "https://a.espncdn.com/i/teamlogos/soccer/505/240.png", visita: "San Luis", escV: "https://a.espncdn.com/i/teamlogos/soccer/505/9829.png" }
     ];
 
     let selections = {};
