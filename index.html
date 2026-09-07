@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000000; /* Fondo general negro */
+            background-color: #000000;
             margin: 0;
             padding: 10px;
             color: #FFD700;
@@ -15,75 +15,79 @@
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: #121212; /* Contenedor negro elegante */
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(255,215,0,0.15); /* Sutil brillo dorado */
+            background: #000000;
             overflow: hidden;
             border: none;
+            box-shadow: none;
         }
         .hero-banner {
             position: relative;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1000&auto=format&fit=crop') center/cover;
-            color: white;
+            background: #000000;
+            color: #FFD700;
             text-align: center;
             padding: 22px 15px;
-            border-bottom: 4px solid #CE1126; /* Rojo patriótico */
+            border-bottom: 2px solid #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
         .hero-banner img {
             width: 85px;
             height: 85px;
             object-fit: contain;
             margin-bottom: 6px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
         }
         .hero-banner h1 {
             margin: 0;
             font-size: 1.7em;
             font-weight: 900;
             letter-spacing: 1.5px;
-            color: #FFD700; /* Letras doradas */
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+            color: #FFD700;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
         }
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD100; /* Dorado */
+            color: #FFD700;
             font-weight: bold;
             letter-spacing: 1px;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .subheader {
-            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor de la bandera */
-            color: #000;
+            background: #000000;
+            color: #FFD700;
             text-align: center;
-            padding: 8px;
+            padding: 10px;
             font-size: 1.05em;
             font-weight: 900;
             letter-spacing: 2px;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+            border-bottom: 1px solid #333;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         }
         .accumulative-banner {
-            background: #1a1a1a;
-            color: #FFD700; /* Letras doradas */
+            background: #000000;
+            color: #FFD700;
             text-align: center;
-            padding: 8px 10px;
+            padding: 10px;
             font-size: 0.85em;
             font-weight: bold;
             letter-spacing: 1px;
             border-bottom: 1px solid #333;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .countdown-container {
-            background-color: #0a0a0a;
+            background-color: #000000;
             padding: 12px 10px;
             text-align: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 1px solid #333;
         }
         .countdown-title {
-            color: #FFD100;
+            color: #FFD700;
             font-size: 0.8em;
             font-weight: bold;
             margin-bottom: 6px;
             letter-spacing: 1px;
             text-transform: uppercase;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .countdown-boxes {
             display: flex;
@@ -91,24 +95,25 @@
             gap: 6px;
         }
         .time-box {
-            background: linear-gradient(135deg, #222, #111);
-            border: 1px solid #444;
+            background: #000000;
+            border: 1px solid #FFD700;
             border-radius: 6px;
             padding: 6px 8px;
             min-width: 45px;
             text-align: center;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         .time-number {
             display: block;
-            color: #FFD700; /* Números dorados */
+            color: #FFD700;
             font-size: 1.2em;
             font-weight: 900;
             font-family: monospace;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
         }
         .time-label {
             display: block;
-            color: #AAAAAA;
+            color: #FFD700;
             font-size: 0.6em;
             margin-top: 2px;
             text-transform: uppercase;
@@ -120,7 +125,7 @@
             padding: 10px 12px;
             border-bottom: 1px solid #222;
             font-size: 0.9em;
-            background-color: #161616; /* Fila de partido oscura */
+            background-color: #000000;
         }
         .team {
             width: 35%;
@@ -128,7 +133,7 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            color: #FFD700; /* Nombres de equipos en dorado */
+            color: #FFD700;
         }
         .team.right {
             justify-content: flex-end;
@@ -138,6 +143,7 @@
             width: 28px;
             height: 28px;
             object-fit: contain;
+            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
         }
         .options {
             display: flex;
@@ -149,37 +155,42 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85em;
-            background: #222;
-            color: #FFD700; /* Opciones L, E, V con texto dorado */
+            background: #000000;
+            color: #FFD700;
             font-weight: bold;
+            box-shadow: 0 0 4px rgba(255, 215, 0, 0.2);
         }
         .options input {
             display: none;
         }
         .options input:checked + span {
-            background-color: #006341; /* Verde selección */
-            color: white;
+            background-color: #FFD700;
+            color: #000000;
             font-weight: bold;
             padding: 3px 7px;
             border-radius: 4px;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
         }
         .info-bar {
-            background: linear-gradient(90deg, #006341, #CE1126);
-            color: white;
+            background: #000000;
+            color: #FFD700;
             padding: 10px;
             text-align: center;
             font-weight: bold;
             font-size: 0.82em;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .form-section {
             padding: 15px;
-            background-color: #121212;
+            background-color: #000000;
         }
         input[type="text"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid #444;
-            background-color: #1e1e1e;
+            border: 1px solid #FFD700;
+            background-color: #000000;
             color: #FFD700;
             border-radius: 6px;
             text-align: center;
@@ -187,13 +198,14 @@
             box-sizing: border-box;
             margin-bottom: 12px;
             font-weight: bold;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         input[type="text"]::placeholder {
-            color: #888;
+            color: #887a00;
         }
         .total-box {
             border: 2px solid #FFD700;
-            background-color: #1a1a1a;
+            background-color: #000000;
             color: #FFD700;
             text-align: center;
             padding: 12px;
@@ -201,6 +213,8 @@
             border-radius: 6px;
             margin-bottom: 12px;
             font-size: 1.1em;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         }
         .btn-container {
             display: flex;
@@ -210,41 +224,54 @@
         button {
             flex: 1;
             padding: 12px;
-            border: none;
+            border: 1px solid #FFD700;
             border-radius: 6px;
-            color: white;
+            color: #FFD700;
             font-weight: bold;
             cursor: pointer;
             font-size: 0.95em;
+            background-color: #000000;
+            box-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
         }
-        .btn-clear { background-color: #CE1126; }
-        .btn-random { background-color: #34495e; color: #FFD700; }
+        .btn-clear { 
+            border-color: #FFD700; 
+            color: #FFD700; 
+        }
+        .btn-random { 
+            border-color: #FFD700; 
+            color: #FFD700; 
+        }
         .btn-whatsapp {
-            background-color: #006341;
+            background-color: #000000;
+            border: 2px solid #FFD700;
+            color: #FFD700;
             width: 100%;
             padding: 14px;
             font-size: 1.15em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
             margin-bottom: 10px;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         }
         .btn-help-whatsapp {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: #25D366;
-            color: white;
+            background-color: #000000;
+            border: 1px solid #FFD700;
+            color: #FFD700;
             text-decoration: none;
             padding: 12px;
             border-radius: 6px;
             font-weight: bold;
             font-size: 0.9em;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
         }
         .btn-help-whatsapp img {
             width: 20px;
             height: 20px;
+            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
         }
     </style>
 </head>
@@ -257,12 +284,10 @@
         <p>Tus pronósticos valen oro</p>
     </div>
     
-    <!-- Franja tricolor de la bandera de México -->
-    <div class="subheader">🇲🇽 MEDIA SEMANA 🇲🇽</div>
+    <div class="subheader">⭐ MEDIA SEMANA ⭐</div>
     
-    <!-- Aviso de Quiniela Acumulable -->
     <div class="accumulative-banner">
-        ⭐ QUINIELA ACUMULABLE ($100 ENTRADA) ⭐
+        QUINIELA ACUMULABLE ($100 ENTRADA)
     </div>
 
     <div class="countdown-container">
@@ -433,7 +458,7 @@
             alert('Por favor ingresa tu nombre');
             return;
         }
-        let mensaje = `*🇲🇽 MAGNO QUINIELAS MX (ACUMULABLE) 🇲🇽*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
+        let mensaje = `*⭐ MAGNO QUINIELAS MX (ACUMULABLE) ⭐*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
         let seleccionadosTotales = 0;
         
         partidos.forEach(p => {
@@ -466,5 +491,4 @@
 </script>
 
 </body>
-    </html>
-    
+</html>
