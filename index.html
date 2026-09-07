@@ -7,19 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
+            background-color: #000000; /* Fondo general negro */
             margin: 0;
             padding: 10px;
-            color: #333;
+            color: #FFD700;
         }
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: #fff;
+            background: #121212; /* Contenedor negro elegante */
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(255,215,0,0.15); /* Sutil brillo dorado */
             overflow: hidden;
-            border: 3px solid #006341; /* Verde patriótico */
+            border: none;
         }
         .hero-banner {
             position: relative;
@@ -41,18 +41,18 @@
             font-size: 1.7em;
             font-weight: 900;
             letter-spacing: 1.5px;
-            color: #FFFFFF;
+            color: #FFD700; /* Letras doradas */
             text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
         }
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD100; /* Dorado / Amarillo bandera */
+            color: #FFD100; /* Dorado */
             font-weight: bold;
             letter-spacing: 1px;
         }
         .subheader {
-            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor */
+            background: linear-gradient(to right, #006341, #FFFFFF, #CE1126); /* Franja tricolor de la bandera */
             color: #000;
             text-align: center;
             padding: 8px;
@@ -60,6 +60,16 @@
             font-weight: 900;
             letter-spacing: 2px;
             text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        }
+        .accumulative-banner {
+            background: #1a1a1a;
+            color: #FFD700; /* Letras doradas */
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333;
         }
         .countdown-container {
             background-color: #0a0a0a;
@@ -91,7 +101,7 @@
         }
         .time-number {
             display: block;
-            color: #FFFFFF;
+            color: #FFD700; /* Números dorados */
             font-size: 1.2em;
             font-weight: 900;
             font-family: monospace;
@@ -108,8 +118,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #222;
             font-size: 0.9em;
+            background-color: #161616; /* Fila de partido oscura */
         }
         .team {
             width: 35%;
@@ -117,6 +128,7 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
+            color: #FFD700; /* Nombres de equipos en dorado */
         }
         .team.right {
             justify-content: flex-end;
@@ -132,12 +144,13 @@
             gap: 5px;
         }
         .options label {
-            border: 1px solid #ccc;
+            border: 1px solid #444;
             padding: 5px 9px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85em;
-            background: #f9f9f9;
+            background: #222;
+            color: #FFD700; /* Opciones L, E, V con texto dorado */
             font-weight: bold;
         }
         .options input {
@@ -160,12 +173,14 @@
         }
         .form-section {
             padding: 15px;
-            background-color: #fafafa;
+            background-color: #121212;
         }
         input[type="text"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid #444;
+            background-color: #1e1e1e;
+            color: #FFD700;
             border-radius: 6px;
             text-align: center;
             font-size: 1.05em;
@@ -173,10 +188,13 @@
             margin-bottom: 12px;
             font-weight: bold;
         }
+        input[type="text"]::placeholder {
+            color: #888;
+        }
         .total-box {
-            border: 2px solid #006341;
-            background-color: #e8f5e9;
-            color: #006341;
+            border: 2px solid #FFD700;
+            background-color: #1a1a1a;
+            color: #FFD700;
             text-align: center;
             padding: 12px;
             font-weight: bold;
@@ -200,16 +218,15 @@
             font-size: 0.95em;
         }
         .btn-clear { background-color: #CE1126; }
-        .btn-random { background-color: #34495e; }
+        .btn-random { background-color: #34495e; color: #FFD700; }
         .btn-whatsapp {
             background-color: #006341;
             width: 100%;
             padding: 14px;
             font-size: 1.15em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             margin-bottom: 10px;
         }
-        /* Estilo para el botón de ayuda de WhatsApp */
         .btn-help-whatsapp {
             display: flex;
             align-items: center;
@@ -223,7 +240,7 @@
             font-weight: bold;
             font-size: 0.9em;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
         .btn-help-whatsapp img {
             width: 20px;
@@ -239,7 +256,14 @@
         <h1>MAGNO QUINIELAS MX</h1>
         <p>Tus pronósticos valen oro</p>
     </div>
+    
+    <!-- Franja tricolor de la bandera de México -->
     <div class="subheader">🇲🇽 MEDIA SEMANA 🇲🇽</div>
+    
+    <!-- Aviso de Quiniela Acumulable -->
+    <div class="accumulative-banner">
+        ⭐ QUINIELA ACUMULABLE ($100 ENTRADA) ⭐
+    </div>
 
     <div class="countdown-container">
         <div class="countdown-title">Cierre de Quiniela</div>
@@ -280,7 +304,6 @@
         
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp 📱</button>
         
-        <!-- Botón de Ayuda / Más Información directo a tu WhatsApp -->
         <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             ¿Dudas? Más información sobre cómo se juega
@@ -331,7 +354,6 @@
             seleccionadosTotales += checks.length;
         });
 
-        // 8 partidos base + 4 extras máximos = 12 selecciones totales permitidas
         if (seleccionadosTotales > 12) {
             alert("⚠️ Límite máximo alcanzado: Solo se permiten hasta 4 dobles/triples (extras) por $400.00.");
             element.checked = false;
@@ -350,10 +372,10 @@
 
         if (seleccionadosTotales > 8) {
             let extras = seleccionadosTotales - 8;
-            if (extras === 1) total = 125;       // 1er extra: $25 (Total $125)
-            else if (extras === 2) total = 150;  // 2do extra: $50 (Total $150)
-            else if (extras === 3) total = 200;  // 3er extra: $100 (Total $200)
-            else if (extras >= 4) total = 400;   // 4to extra: $200 (Total $400 - Límite Máximo)
+            if (extras === 1) total = 125;
+            else if (extras === 2) total = 150;
+            else if (extras === 3) total = 200;
+            else if (extras >= 4) total = 400;
         }
 
         document.getElementById('total-display').innerText = `TOTAL: $${total}.00`;
@@ -411,7 +433,7 @@
             alert('Por favor ingresa tu nombre');
             return;
         }
-        let mensaje = `*🇲🇽 MAGNO QUINIELAS MX 🇲🇽*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
+        let mensaje = `*🇲🇽 MAGNO QUINIELAS MX (ACUMULABLE) 🇲🇽*\nParticipante: ${nombre}\n\n*Pronósticos:*\n`;
         let seleccionadosTotales = 0;
         
         partidos.forEach(p => {
@@ -433,7 +455,6 @@
 
         mensaje += `\n*TOTAL: $${total}.00*`;
         
-        // Número configurado automáticamente para recibir las quinielas: +52 984 279 4702
         const url = `https://api.whatsapp.com/send?phone=5219842794702&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
@@ -445,4 +466,5 @@
 </script>
 
 </body>
-</html>
+    </html>
+    
