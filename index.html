@@ -114,34 +114,41 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e0e0e0;
             font-size: 0.9em;
             background-color: #ffffff;
         }
+        /* Estructura dividida en cuadrícula / cajas claras y uniformes para cada equipo */
         .team {
             width: 35%;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-weight: 600;
             color: #000000;
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 6px 8px;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
         .team.right {
             justify-content: flex-end;
             text-align: right;
         }
         .team img {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             object-fit: contain;
+            flex-shrink: 0;
         }
         .options {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
         .options label {
             border: 1px solid #ccc;
-            padding: 5px 9px;
+            padding: 5px 8px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85em;
@@ -156,7 +163,7 @@
             background-color: #000000;
             color: #FFD700;
             font-weight: bold;
-            padding: 3px 7px;
+            padding: 3px 6px;
             border-radius: 4px;
         }
         .info-bar {
@@ -316,11 +323,11 @@
 </div>
 
 <script>
-    // Partidos actualizados con el nuevo archivo de logo para el Atlante: "1280px-Atlante_FC_2022_Logo.svg.png"
+    // Partidos actualizados con el logo correcto de Querétaro ("960px-Querétaro_F.C._logo.svg.png") y Atlante
     const partidos = [
         { id: 1, local: "Necaxa", escL: "250px-Club_Necaxa_Logo.svg.png", visita: "Puebla", escV: "231.png" },
         { id: 2, local: "Atlante", escL: "1280px-Atlante_FC_2022_Logo.svg.png", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
-        { id: 3, local: "Tijuana", escL: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png", visita: "Querétaro", escV: "Club_Querétaro_logo.svg.png" },
+        { id: 3, local: "Tijuana", escL: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png", visita: "Querétaro", escV: "960px-Querétaro_F.C._logo.svg.png" },
         { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "Atlas", escV: "250px-Fútbol_Club_Atlas.svg.png" },
         { id: 5, local: "León", escL: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" },
         { id: 6, local: "Cruz Azul", escL: "Cruz-Azul-Logo.png", visita: "América", escV: "Club-America-Logo.png" },
@@ -337,7 +344,7 @@
                 <div class="match-row">
                     <div class="team">
                         <img src="${p.escL}" alt="${p.local}">
-                        <span>${p.local}</span>
+                        <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.local}</span>
                     </div>
                     <div class="options">
                         <label><input type="checkbox" name="m${p.id}" value="L" onchange="verificarLimiteYCalcular(this)"><span>L</span></label>
@@ -345,7 +352,7 @@
                         <label><input type="checkbox" name="m${p.id}" value="V" onchange="verificarLimiteYCalcular(this)"><span>V</span></label>
                     </div>
                     <div class="team right">
-                        <span>${p.visita}</span>
+                        <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.visita}</span>
                         <img src="${p.escV}" alt="${p.visita}">
                     </div>
                 </div>
@@ -488,4 +495,5 @@
 </script>
 
 </body>
-</html>
+    </html>
+    
