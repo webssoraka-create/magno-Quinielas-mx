@@ -109,16 +109,27 @@
             margin-top: 2px;
             text-transform: uppercase;
         }
+        /* Contenedor general de partidos con un marco estético */
+        .matches-frame {
+            border: 2px solid #FFD700;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
         .match-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 12px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
             font-size: 0.9em;
             background-color: #ffffff;
         }
-        /* Estructura dividida en cuadrícula / cajas claras y uniformes para cada equipo */
+        .match-row:last-child {
+            border-bottom: none;
+        }
         .team {
             width: 35%;
             display: flex;
@@ -298,7 +309,8 @@
         </div>
     </div>
 
-    <div id="matches-container"></div>
+    <!-- Marco alrededor de todos los equipos de fútbol -->
+    <div class="matches-frame" id="matches-container"></div>
 
     <div class="info-bar">
         BASE: $100.00 (9 PARTIDOS) | CIERRE: 11 DE SEPT. 3:30 P. M.
@@ -315,7 +327,8 @@
         
         <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Quiniela por WhatsApp 📱</button>
         
-        <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" target="_blank">
+        <!-- Enlace actualizado con el número nuevo de WhatsApp normal (reemplazar 'AQUIPONELANUEVO' con el número de 10 dígitos correcto con código de país si es necesario) -->
+        <a href="https://api.whatsapp.com/send?phone=5219842794702&text=Hola,%20quisiera%20más%20información%20sobre%20cómo%20se%20juega%20la%20quiniela." class="btn-help-whatsapp" id="help-whatsapp-link" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             ¿Dudas? Más información sobre cómo se juega
         </a>
@@ -323,7 +336,9 @@
 </div>
 
 <script>
-    // Partidos actualizados con el logo correcto de Querétaro ("960px-Querétaro_F.C._logo.svg.png") y Atlante
+    // Número de WhatsApp actualizado (asegúrate de cambiar los dígitos finales si tu número nuevo es distinto)
+    const numeroWhatsApp = "5219842794702"; 
+
     const partidos = [
         { id: 1, local: "Necaxa", escL: "250px-Club_Necaxa_Logo.svg.png", visita: "Puebla", escV: "231.png" },
         { id: 2, local: "Atlante", escL: "1280px-Atlante_FC_2022_Logo.svg.png", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
@@ -484,16 +499,15 @@
 
         mensaje += `\n*TOTAL: $${total}.00*`;
         
-        const url = `https://api.whatsapp.com/send?phone=5219842794702&text=${encodeURIComponent(mensaje)}`;
+        const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(mensaje)}`;
         window.open(url, '_blank');
     }
 
     window.onload = function() {
         renderPartidos();
-        actualizarCronometro();
+        actualizarCronometro(60);
     };
 </script>
 
 </body>
-    </html>
-    
+</html>
