@@ -7,87 +7,80 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000000;
+            background-color: #ffffff;
             margin: 0;
             padding: 10px;
-            color: #FFD700;
+            color: #000000;
         }
         .container {
             max-width: 500px;
             margin: 0 auto;
-            background: #000000;
+            background: #ffffff;
             overflow: hidden;
             border: none;
             box-shadow: none;
         }
         .hero-banner {
             position: relative;
-            background: #000000;
-            color: #FFD700;
+            background: #ffffff;
+            color: #000000;
             text-align: center;
             padding: 22px 15px;
             border-bottom: 2px solid #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
         .hero-banner img {
             width: 85px;
             height: 85px;
             object-fit: contain;
             margin-bottom: 6px;
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
         }
         .hero-banner h1 {
             margin: 0;
             font-size: 1.7em;
             font-weight: 900;
             letter-spacing: 1.5px;
-            color: #FFD700;
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+            color: #000000;
         }
         .hero-banner p {
             margin: 4px 0 0 0;
             font-size: 0.85em;
-            color: #FFD700;
+            color: #333333;
             font-weight: bold;
             letter-spacing: 1px;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .subheader {
-            background: #000000;
-            color: #FFD700;
+            background: #ffffff;
+            color: #000000;
             text-align: center;
             padding: 10px;
             font-size: 1.05em;
             font-weight: 900;
             letter-spacing: 2px;
-            border-bottom: 1px solid #333;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+            border-bottom: 1px solid #ddd;
         }
         .accumulative-banner {
-            background: #000000;
-            color: #FFD700;
+            background: #ffffff;
+            color: #000000;
             text-align: center;
             padding: 10px;
             font-size: 0.85em;
             font-weight: bold;
             letter-spacing: 1px;
-            border-bottom: 1px solid #333;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+            border-bottom: 1px solid #ddd;
         }
         .countdown-container {
-            background-color: #000000;
+            background-color: #ffffff;
             padding: 12px 10px;
             text-align: center;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #ddd;
         }
         .countdown-title {
-            color: #FFD700;
+            color: #333333;
             font-size: 0.8em;
             font-weight: bold;
             margin-bottom: 6px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
         }
         .countdown-boxes {
             display: flex;
@@ -95,25 +88,23 @@
             gap: 6px;
         }
         .time-box {
-            background: #000000;
+            background: #ffffff;
             border: 1px solid #FFD700;
             border-radius: 6px;
             padding: 6px 8px;
             min-width: 45px;
             text-align: center;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         .time-number {
             display: block;
-            color: #FFD700;
+            color: #000000;
             font-size: 1.2em;
             font-weight: 900;
             font-family: monospace;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
         }
         .time-label {
             display: block;
-            color: #FFD700;
+            color: #555555;
             font-size: 0.6em;
             margin-top: 2px;
             text-transform: uppercase;
@@ -123,9 +114,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px 12px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #eee;
             font-size: 0.9em;
-            background-color: #000000;
+            background-color: #ffffff;
         }
         .team {
             width: 35%;
@@ -133,7 +124,7 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            color: #FFD700;
+            color: #000000;
         }
         .team.right {
             justify-content: flex-end;
@@ -143,78 +134,71 @@
             width: 28px;
             height: 28px;
             object-fit: contain;
-            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
         }
         .options {
             display: flex;
             gap: 5px;
         }
         .options label {
-            border: 1px solid #444;
+            border: 1px solid #ccc;
             padding: 5px 9px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85em;
-            background: #000000;
-            color: #FFD700;
+            background: #ffffff;
+            color: #000000;
             font-weight: bold;
-            box-shadow: 0 0 4px rgba(255, 215, 0, 0.2);
         }
         .options input {
             display: none;
         }
         .options input:checked + span {
-            background-color: #FFD700;
-            color: #000000;
+            background-color: #000000;
+            color: #FFD700;
             font-weight: bold;
             padding: 3px 7px;
             border-radius: 4px;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
         }
         .info-bar {
-            background: #000000;
-            color: #FFD700;
+            background: #ffffff;
+            color: #000000;
             padding: 10px;
             text-align: center;
             font-weight: bold;
             font-size: 0.82em;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
         .form-section {
             padding: 15px;
-            background-color: #000000;
+            background-color: #ffffff;
         }
         input[type="text"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid #FFD700;
-            background-color: #000000;
-            color: #FFD700;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            color: #000000;
             border-radius: 6px;
             text-align: center;
             font-size: 1.05em;
             box-sizing: border-box;
             margin-bottom: 12px;
             font-weight: bold;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
         input[type="text"]::placeholder {
-            color: #887a00;
+            color: #999999;
         }
         .total-box {
-            border: 2px solid #FFD700;
-            background-color: #000000;
-            color: #FFD700;
+            border: 2px solid #000000;
+            background-color: #ffffff;
+            color: #000000;
             text-align: center;
             padding: 12px;
             font-weight: bold;
             border-radius: 6px;
             margin-bottom: 12px;
             font-size: 1.1em;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         }
         .btn-container {
             display: flex;
@@ -224,54 +208,49 @@
         button {
             flex: 1;
             padding: 12px;
-            border: 1px solid #FFD700;
+            border: 1px solid #000000;
             border-radius: 6px;
-            color: #FFD700;
+            color: #ffffff;
             font-weight: bold;
             cursor: pointer;
             font-size: 0.95em;
             background-color: #000000;
-            box-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
         }
         .btn-clear { 
-            border-color: #FFD700; 
-            color: #FFD700; 
+            background-color: #666666;
+            border-color: #666666;
         }
         .btn-random { 
-            border-color: #FFD700; 
-            color: #FFD700; 
+            background-color: #333333;
+            border-color: #333333;
         }
         .btn-whatsapp {
-            background-color: #000000;
-            border: 2px solid #FFD700;
-            color: #FFD700;
+            background-color: #25D366;
+            border: 2px solid #25D366;
+            color: #ffffff;
             width: 100%;
             padding: 14px;
             font-size: 1.15em;
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
             margin-bottom: 10px;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
         }
         .btn-help-whatsapp {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: #000000;
-            border: 1px solid #FFD700;
-            color: #FFD700;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #333333;
             text-decoration: none;
             padding: 12px;
             border-radius: 6px;
             font-weight: bold;
             font-size: 0.9em;
             text-align: center;
-            box-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
         }
         .btn-help-whatsapp img {
             width: 20px;
             height: 20px;
-            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
         }
     </style>
 </head>
@@ -337,11 +316,10 @@
 </div>
 
 <script>
-    // Partidos ordenados exactamente como en tu segunda imagen de referencia, 
-    // manteniendo tu diseño negro con dorado y tus botones intactos.
+    // Partidos actualizados con el nuevo archivo de logo para el Atlante: "1280px-Atlante_FC_2022_Logo.svg.png"
     const partidos = [
         { id: 1, local: "Necaxa", escL: "250px-Club_Necaxa_Logo.svg.png", visita: "Puebla", escV: "231.png" },
-        { id: 2, local: "Atlante", escL: "250px-Fútbol_Club_Atlas.svg.png", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
+        { id: 2, local: "Atlante", escL: "1280px-Atlante_FC_2022_Logo.svg.png", visita: "Pachuca", escV: "pachuca-logo-png_seeklogo-288768.png" },
         { id: 3, local: "Tijuana", escL: "414-4142028_club-tijuana-logo-ohio-wesleyan-soccer-logo-hd.png", visita: "Querétaro", escV: "Club_Querétaro_logo.svg.png" },
         { id: 4, local: "Toluca", escL: "1280px-Club_Toluca_Logo.svg.png", visita: "Atlas", escV: "250px-Fútbol_Club_Atlas.svg.png" },
         { id: 5, local: "León", escL: "04a814c4039eca50e7f7a3cc56ceaaa0.jpg", visita: "San Luis", escV: "atletico-de-san-luis.56dacec6.png" },
@@ -383,7 +361,6 @@
             totalSelecciones += checks.length;
         });
 
-        // 9 partidos base (o límite ajustado)
         if (totalSelecciones > 13) {
             alert("⚠️ Límite máximo alcanzado de selecciones.");
             element.checked = false;
